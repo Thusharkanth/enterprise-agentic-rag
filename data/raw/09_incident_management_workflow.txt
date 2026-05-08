@@ -1,0 +1,193 @@
+NEXACORE TECHNOLOGIES — INCIDENT MANAGEMENT WORKFLOW
+Document ID: INC-SOP-003 | Version: 3.0 | Last Updated: January 2024
+Owner: Engineering Operations / Security Operations Center (SOC)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. PURPOSE AND SCOPE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This document defines the end-to-end incident management process for NexaCore Technologies, covering both technical incidents (outages, performance degradation) and security incidents (breaches, threats). It applies to all engineering, DevOps, and security personnel.
+
+The goal is to minimize incident impact, restore service quickly, and ensure every incident drives improvement.
+
+Cross-reference: Deployment SOP (ENG-SOP-007), Cybersecurity Guidelines (SEC-POL-002), Customer Support Process (SUP-PROC-001)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. INCIDENT CLASSIFICATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SEV-1 (Critical):
+- Complete production outage or data breach
+- Affecting all or majority of users/clients
+- Immediate financial or reputational risk
+- Examples: Full service down, confirmed data breach, ransomware, DDoS
+
+SEV-2 (High):
+- Major functionality degraded
+- Significant subset of users/clients affected
+- No immediate resolution path
+- Examples: Checkout failures, payment processing errors, major API degradation
+
+SEV-3 (Medium):
+- Non-critical functionality impaired
+- Limited user impact with workaround available
+- Examples: Reports not generating, non-critical integration failure
+
+SEV-4 (Low):
+- Minor bug or cosmetic issue
+- No user impact to core flows
+- Examples: UI glitch, typo in error message, low-priority integration issue
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. INCIDENT RESPONSE ROLES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Incident Commander (IC):
+- Owns the incident end-to-end
+- Makes decisions when consensus cannot be reached quickly
+- Delegates tasks to responders
+- Communicates status to stakeholders
+
+Technical Lead:
+- Drives the technical investigation and resolution
+- Coordinates with engineers across domains
+- Reports findings to IC
+
+Communications Lead:
+- Handles internal and external communication
+- Updates status page (status.nexacore.com)
+- Drafts client notifications with Client Success
+
+Scribe:
+- Documents all actions, findings, and timeline in real-time
+- Maintains the incident log in Confluence (INC space)
+
+Subject Matter Experts (SMEs):
+- Called in based on affected domain (cloud, security, DB, application)
+
+For SEV-1: IC must be a Senior Engineer or above. On-call manager is looped in within 15 minutes.
+For SEV-2: IC can be any engineer; manager notified within 1 hour.
+For SEV-3/4: Standard on-call process; no formal IC required.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. INCIDENT LIFECYCLE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PHASE 1: DETECTION
+Incidents may be detected via:
+- Automated monitoring alerts (Datadog, CloudWatch, PagerDuty)
+- Client reports via support portal or Tier 3 Slack
+- Internal employee reports
+- Security tools (GuardDuty, Sentinel, EDR)
+
+First person to detect an incident must:
+1. Immediately post in #incidents Slack channel
+2. Page on-call engineer via PagerDuty
+3. Open an incident ticket in Jira (project: INC)
+
+PHASE 2: TRIAGE
+IC is identified and accepts the incident within:
+- SEV-1: 5 minutes
+- SEV-2: 15 minutes
+- SEV-3/4: 1 hour
+
+IC creates an incident Slack channel: #inc-YYYYMMDD-[description]
+All incident communication happens in this dedicated channel.
+Scribe begins logging immediately.
+
+PHASE 3: INVESTIGATION
+Technical Lead begins investigation:
+- Review monitoring dashboards (Datadog, CloudWatch)
+- Review recent deployments (check Deployment Registry — were any in the last 2 hours?)
+- Check for infrastructure alerts (AWS Health Dashboard)
+- Review logs (ELK Stack / CloudWatch Logs)
+- Identify blast radius: how many users/clients affected?
+
+IC focuses on coordination — not investigation. Do not let IC get pulled into technical work.
+
+PHASE 4: MITIGATION
+Priority is to reduce impact, not necessarily to fully fix the root cause.
+Mitigation options (in order of preference):
+1. Rollback to last stable deployment (if deployment-related)
+2. Feature flag to disable affected feature
+3. Traffic rerouting or failover
+4. Scale up resources (if capacity-related)
+5. Emergency patch (last resort — high risk during incident)
+
+IC authorizes mitigation action. All actions are logged by Scribe.
+
+PHASE 5: RESOLUTION
+Incident is resolved when:
+- Service is restored to normal operation
+- Key metrics (error rate, latency, availability) are within normal thresholds for at least 30 minutes
+
+IC declares resolution and posts in #incidents and dedicated channel.
+
+PHASE 6: COMMUNICATION
+During the incident, Communications Lead manages:
+- Internal updates (Slack #incidents every 30 min for SEV-1)
+- External status page updates (status.nexacore.com)
+- Client notifications (per escalation thresholds in Customer Support Process)
+- Executive brief for SEV-1 (VP Engineering, CEO briefed within 1 hour)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. POST-INCIDENT REVIEW (PIR)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+All SEV-1 and SEV-2 incidents require a Post-Incident Review (PIR), also known as a postmortem.
+
+Timeline:
+- PIR meeting: Within 48 hours of resolution (schedule immediately)
+- PIR document published: Within 5 business days
+
+PIR Document must include (use template: INC-TMPL-PIR in Confluence):
+- Incident timeline (detection → resolution)
+- Root cause analysis (5 Whys or similar)
+- Customer/business impact (quantified where possible)
+- What went well
+- What went wrong
+- Action items with owners and due dates
+
+PIR culture: Blameless. Focus on process and system failures, not individuals. PIR findings are shared with the broader engineering team monthly.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6. SECURITY INCIDENT SPECIFICS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+For suspected or confirmed security breaches:
+- Security team lead assumes IC role immediately
+- Legal and Compliance must be notified within 1 hour
+- Evidence preservation is mandatory — DO NOT wipe logs or systems
+- Client notification timeline depends on contract SLA and regulatory requirements (HIPAA: 60 days; GDPR: 72 hours)
+- Forensic investigation may be required (external firm may be engaged)
+- Law enforcement notification: Legal team decides in coordination with CISO
+
+For full security incident procedures, refer to the Security Incident Response Plan (SEC-SOP-001 — document currently under revision, ETA Q1 2024).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7. MONITORING AND ALERTING REFERENCE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Primary monitoring stack:
+- Datadog: APM, infrastructure metrics, logs, dashboards
+- PagerDuty: On-call scheduling and alerting
+- CloudWatch: AWS-native metrics and alarms
+- AWS GuardDuty: Threat detection
+- New Relic: Secondary APM (legacy services — being migrated to Datadog)
+
+Alert thresholds (SEV-1 triggers):
+- Error rate > 5% sustained for 2+ minutes
+- P99 latency > 5 seconds sustained for 2+ minutes
+- Health check failure for 3+ consecutive checks
+- CPU > 95% sustained for 5+ minutes across a service
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8. CONTACTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- On-Call (PagerDuty): Auto-routes based on service
+- Security 24/7: security@nexacore.com | ext. 9911
+- Engineering Manager On-Call: Listed in PagerDuty schedule
+- VP Engineering: vp-eng@nexacore.com
+- Client Comms: client-success@nexacore.com
+- Status Page Admin: devops@nexacore.com

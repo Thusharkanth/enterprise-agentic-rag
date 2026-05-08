@@ -1,0 +1,182 @@
+NEXACORE TECHNOLOGIES — API DESIGN AND DOCUMENTATION STANDARDS
+Document ID: ENG-STAND-002 | Version: 1.5 | Last Updated: November 2023
+Owner: Engineering — Platform & Architecture Team
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. PURPOSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This document defines NexaCore's internal and client-facing API design standards. Adherence ensures consistent, predictable, and maintainable APIs across all services. These standards apply to all RESTful APIs; GraphQL and gRPC guidelines are covered in separate documents (ENG-STAND-003 and ENG-STAND-004, both in draft).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. REST API DESIGN PRINCIPLES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+2.1 Resource Naming
+- Use nouns, not verbs: /users not /getUsers
+- Use plural nouns: /users, /tickets, /deployments
+- Lowercase, hyphen-separated: /support-tickets not /supportTickets
+- Hierarchical where logical: /clients/{clientId}/tickets/{ticketId}
+
+2.2 HTTP Methods
+- GET: Retrieve resources (must be idempotent and safe)
+- POST: Create a resource or trigger an action
+- PUT: Replace a resource entirely
+- PATCH: Partially update a resource
+- DELETE: Remove a resource
+
+Do not use GET to perform state-changing operations.
+
+2.3 Status Codes
+Use HTTP status codes correctly:
+- 200 OK: Successful GET, PATCH
+- 201 Created: Successful POST (include Location header)
+- 204 No Content: Successful DELETE
+- 400 Bad Request: Malformed request or validation failure
+- 401 Unauthorized: Missing or invalid authentication
+- 403 Forbidden: Authenticated but insufficient permissions
+- 404 Not Found: Resource does not exist
+- 409 Conflict: State conflict (e.g., duplicate entry)
+- 422 Unprocessable Entity: Business logic failure
+- 429 Too Many Requests: Rate limit exceeded
+- 500 Internal Server Error: Unexpected server error (do not expose internals)
+
+2.4 Versioning
+All APIs must be versioned from day one. Use URI versioning:
+- /api/v1/users
+- /api/v2/users
+
+Increment major version only for breaking changes. Non-breaking additions (new optional fields, new endpoints) do not require a new version. Support at least N-1 versions simultaneously. Announce deprecation at least 6 months in advance.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. REQUEST AND RESPONSE STANDARDS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+3.1 Request Format
+- Content-Type: application/json (required for POST/PUT/PATCH)
+- Use camelCase for JSON field names
+- Validate and sanitize all inputs server-side (never trust client input)
+- For large payloads, use pagination (see Section 4)
+
+3.2 Response Format
+All responses must use a consistent envelope:
+
+Success:
+{
+  "status": "success",
+  "data": { ... },
+  "meta": {
+    "requestId": "abc-123",
+    "timestamp": "2024-01-15T10:30:00Z"
+  }
+}
+
+Error:
+{
+  "status": "error",
+  "error": {
+    "code": "VALIDATION_FAILED",
+    "message": "Email address is invalid",
+    "details": [ { "field": "email", "issue": "Invalid format" } ]
+  },
+  "meta": {
+    "requestId": "abc-124",
+    "timestamp": "2024-01-15T10:30:01Z"
+  }
+}
+
+Never expose stack traces, internal error messages, or database errors in responses.
+
+3.3 Date and Time
+- Always use ISO 8601 format: 2024-01-15T10:30:00Z
+- All timestamps must be in UTC
+- Do not use Unix timestamps in public APIs
+
+3.4 Pagination
+For endpoints returning collections:
+- Use cursor-based pagination for large or frequently-updated datasets
+- Use offset/limit for simpler use cases
+
+Response must include:
+{
+  "data": [...],
+  "pagination": {
+    "total": 1024,
+    "page": 1,
+    "perPage": 25,
+    "nextCursor": "abc123"
+  }
+}
+
+Default page size: 25. Maximum page size: 100.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. AUTHENTICATION AND AUTHORIZATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+4.1 Authentication
+All APIs must require authentication except explicitly public endpoints.
+- Internal service-to-service: mTLS + service account JWT
+- Client-facing APIs: OAuth 2.0 (Authorization Code with PKCE for user-facing; Client Credentials for machine-to-machine)
+- API Keys: Only for simple integrations where OAuth is impractical; must rotate every 90 days
+
+4.2 Authorization
+- Implement RBAC (Role-Based Access Control) on all endpoints
+- Use scopes in JWTs to restrict access
+- Log all authorization failures
+- Never implement authorization logic in the client
+
+4.3 Rate Limiting
+All public APIs must implement rate limiting:
+- Default: 1000 requests/hour per API key or client
+- Burst: Up to 100 requests/minute
+- Return 429 with Retry-After header when limit is exceeded
+
+Rate limit headers must be returned on all responses:
+- X-RateLimit-Limit
+- X-RateLimit-Remaining
+- X-RateLimit-Reset
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. API DOCUMENTATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+5.1 OpenAPI Specification
+All APIs must have an OpenAPI 3.0 specification maintained alongside the code in the repository. The spec must be:
+- Kept in sync with actual implementation (CI check will fail if out of sync)
+- Complete: every endpoint, request parameter, and response schema documented
+- Reviewed as part of the PR process
+
+5.2 Developer Portal
+Internal APIs are published to the internal developer portal (dev.nexacore.internal).
+Client-facing APIs are published to the external portal (developers.nexacore.com — NOTE: this portal is still under construction as of Nov 2023; external API docs are currently shared as PDF via Client Success).
+
+5.3 Changelog
+Every API must maintain a CHANGELOG.md in the repository documenting changes by version.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6. SECURITY REQUIREMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- All APIs must use HTTPS/TLS 1.2+ (TLS 1.3 preferred)
+- CORS must be explicitly configured — do not use wildcard (*) in production
+- Input validation on all fields; reject unexpected fields (strict mode)
+- Implement OWASP API Security Top 10 controls
+- Security review required before any public API release
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7. KNOWN GAPS AND OPEN ITEMS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- GraphQL standards (ENG-STAND-003): Draft incomplete — target: Q1 2024
+- gRPC standards (ENG-STAND-004): Not yet started — internal gRPC usage is ad-hoc
+- External developer portal not live yet — workaround: PDFs via Client Success
+- Several legacy APIs do not comply with these standards (pre-2022 services). Remediation plan being scoped by Platform team. Estimated timeline: unknown.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8. CONTACTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- API Standards Questions: platform-team@nexacore.com
+- Security Review: security@nexacore.com
+- Developer Portal: devportal@nexacore.com

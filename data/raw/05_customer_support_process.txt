@@ -1,0 +1,153 @@
+NEXACORE TECHNOLOGIES — CUSTOMER SUPPORT PROCESS GUIDE
+Document ID: SUP-PROC-001 | Version: 2.3 | Last Updated: December 2023
+Owner: Customer Support & Client Success Department
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. OVERVIEW
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NexaCore Technologies provides tiered customer support services to all clients under active contracts. Our support model is designed to deliver fast, consistent, and measurable resolution of client issues across our managed IT, cloud, software, and cybersecurity service lines.
+
+This document outlines the intake, triage, escalation, and resolution processes used by our support teams.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. SUPPORT TIERS AND SLAs
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NexaCore clients are assigned to a support tier based on their contract:
+
+TIER 1 — BASIC SUPPORT
+- Available: Mon–Fri, 8:00 AM – 6:00 PM CT
+- Channels: Email, support portal
+- First Response SLA: 8 business hours
+- Resolution SLA: 5 business days for standard issues
+
+TIER 2 — PROFESSIONAL SUPPORT
+- Available: Mon–Fri, 7:00 AM – 9:00 PM CT
+- Channels: Email, support portal, phone
+- First Response SLA: 4 business hours
+- Resolution SLA: 3 business days for standard issues
+- Includes: Dedicated support engineer
+
+TIER 3 — ENTERPRISE SUPPORT
+- Available: 24/7/365
+- Channels: Email, portal, phone, dedicated Slack channel
+- First Response SLA: 1 hour (P1 issues), 4 hours (P2), 8 hours (P3/P4)
+- Resolution SLA: Defined per client SLA agreement
+- Includes: Named Client Success Manager (CSM), quarterly business reviews
+
+Note: SLA timers pause on weekends and holidays for Tier 1 and Tier 2 clients.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. ISSUE PRIORITY DEFINITIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+P1 — CRITICAL
+Definition: Complete service outage or data breach affecting the client's core operations. No workaround available.
+Examples: Production system down, security breach, data loss, complete API failure
+Response: Immediate — on-call engineer paged within 15 minutes
+
+P2 — HIGH
+Definition: Major feature or service degraded; significant business impact. Limited workaround available.
+Examples: Degraded performance affecting >50% of users, partial outage, failed deployments
+Response: Within 1–4 hours depending on tier
+
+P3 — MEDIUM
+Definition: Non-critical issue with moderate business impact. Workaround available.
+Examples: Single feature malfunctioning, intermittent errors, reporting discrepancies
+Response: Within 4–8 business hours
+
+P4 — LOW
+Definition: Minor issue or informational request. No business impact.
+Examples: UI cosmetic issue, documentation request, general how-to questions
+Response: Within 1–5 business days
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. TICKET INTAKE AND HANDLING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+4.1 Intake Channels
+Clients may submit support requests via:
+- Support Portal: support.nexacore.com (all tiers)
+- Email: support@nexacore.com (all tiers)
+- Phone: 1-800-NEX-HELP (Tier 2 and above)
+- Dedicated Slack Channel (Tier 3 only)
+
+All tickets are logged in Zendesk and assigned a unique ticket number. Auto-acknowledgment is sent to the client immediately upon submission.
+
+4.2 Triage
+Tickets are triaged by the Tier 1 Support Analyst within the first response SLA. Triage involves:
+- Validating the issue description
+- Assigning priority (P1–P4) based on business impact assessment
+- Tagging the relevant service domain (cloud, security, app, infrastructure)
+- Escalating immediately if P1 or security-related
+
+4.3 First Response
+The first response must:
+- Acknowledge the issue
+- Confirm the assigned priority
+- Provide an initial assessment or request additional information
+- Set expectations on next steps and timeline
+
+Do not close a ticket without a resolution confirmed by the client contact.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. ESCALATION PROCESS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+L1 Analyst → L2 Engineer → L3 Specialist / Dev Team → Management Escalation
+
+Escalation triggers:
+- SLA breach imminent or occurring
+- P1 issue not resolved within 2 hours
+- Client requests escalation
+- Issue requires code change or infrastructure modification
+- Security or compliance concern identified
+
+For P1 issues, the following must be notified:
+- On-call engineer (PagerDuty)
+- Support Manager
+- Client Success Manager (for Tier 3 clients)
+- VP of Engineering (if infrastructure-wide impact)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6. COMMUNICATION STANDARDS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- For P1 issues: Update client every 30 minutes until resolved
+- For P2 issues: Update client every 2 hours
+- For P3/P4: Update when status changes or when requested
+- All communication must be professional, empathetic, and solution-focused
+- Do not speculate on root cause until confirmed by technical investigation
+- Do not promise a fix timeline unless approved by the engineering lead
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7. RESOLUTION AND CLOSURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+A ticket may be resolved when:
+- The reported issue has been fixed and confirmed by the support engineer
+- The client confirms resolution or does not respond within 48 hours of the resolution notice
+
+Upon closure:
+- A resolution summary must be added to the Zendesk ticket
+- CSAT survey is automatically sent to the client contact
+- For P1/P2 issues: A Root Cause Analysis (RCA) report must be completed within 5 business days and shared with the client
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8. KNOWN LIMITATIONS (CURRENT AS OF DEC 2023)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Zendesk-to-Jira integration is partially broken: tickets tagged "engineering-escalation" may not auto-create Jira issues. Manual creation is required until the fix is deployed (ETA: Q1 2024).
+- Phone support for Tier 2 clients is temporarily unavailable on Saturdays due to staffing changes. Email/portal remain available.
+- SLA reporting dashboard in the client portal shows data with a 4-hour lag. Real-time SLA status should be requested via the support team directly.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+9. KEY CONTACTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Support Portal: support.nexacore.com
+- General Support: support@nexacore.com
+- Support Manager: support-manager@nexacore.com
+- Client Success: client-success@nexacore.com
+- Emergency / P1 Hotline: 1-800-NEX-CRIT (Tier 3 clients only)

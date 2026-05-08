@@ -1,0 +1,119 @@
+NEXACORE TECHNOLOGIES — IT PROCUREMENT AND ASSET MANAGEMENT POLICY
+Document ID: IT-POL-004 | Version: 1.1 | Last Updated: August 2023
+Owner: IT Department / Procurement
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. PURPOSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This policy governs the procurement, tracking, maintenance, and disposal of IT hardware and software assets at NexaCore Technologies. Proper asset management ensures security, compliance, and cost efficiency.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. HARDWARE PROCUREMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+2.1 Standard Equipment
+All hardware purchases must go through the IT procurement process. Standard equipment issued to employees:
+
+Engineering / Technical Roles:
+- MacBook Pro 14" (M3, 16GB RAM, 512GB SSD) — standard issue
+- MacBook Pro 16" (M3 Pro, 32GB RAM) — for ML/data engineering roles or on request with manager approval
+
+Non-Technical Roles:
+- Dell Latitude 5540 (i5, 16GB RAM, 256GB SSD)
+- Lenovo ThinkPad E14 (alternative for budget-constrained hiring classes)
+
+Peripherals (one bundle per full-time employee):
+- 27" monitor (Dell or LG — subject to availability)
+- Keyboard and mouse
+- USB-C hub / docking station
+- Webcam (if not built-in)
+
+Additional peripherals may be requested via IT helpdesk with manager approval.
+
+2.2 Procurement Process
+1. Employee or manager submits IT Request via help.nexacore.internal
+2. IT reviews request against standard specs and budget
+3. Requests within standard spec: Auto-approved, ordered within 3 business days
+4. Requests outside standard spec: Requires IT Manager + Finance approval
+5. Equipment delivered to employee within 7–10 business days (US), 14–21 days (Bangalore)
+
+Hardware must never be purchased directly by employees and expensed — all procurement goes through IT.
+
+2.3 Budget
+Annual hardware refresh budget is set each January by Finance in coordination with IT. Priority for refresh is given to devices over 3 years old. Devices that fail outside the refresh cycle are replaced on a priority basis.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. SOFTWARE PROCUREMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+3.1 Approved Software List
+IT maintains an Approved Software List at it.nexacore.internal/approved-software. Software on this list can be installed by the employee or is pre-installed on managed devices.
+
+3.2 Requesting New Software
+To request software not on the approved list:
+1. Submit a Software Approval Request via IT helpdesk
+2. Include: software name, version, purpose, cost, and vendor security questionnaire (template available on IT portal)
+3. IT Security reviews for security risk
+4. Legal reviews licensing and DPA requirements
+5. Finance approves budget impact
+6. Decision within 10 business days
+
+Requests for AI tools must additionally be reviewed by the AI Governance Committee (see AI Policy).
+
+3.3 SaaS Tools
+All SaaS subscriptions must go through the procurement process regardless of cost. Employees may not sign up for SaaS tools using a company credit card without prior approval. Shadow IT (unapproved SaaS usage) poses significant security and compliance risks.
+
+Current SaaS catalog is managed in Zylo (it.nexacore.internal/saas-catalog).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. ASSET TRACKING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+All hardware assets are tracked in ServiceNow (IT Asset Management module). Every device is assigned:
+- Asset tag (physical label)
+- Serial number
+- Assigned user
+- Location
+- Purchase date and warranty expiry
+
+Employees must confirm their assigned assets in ServiceNow annually (reminder sent by IT in January). Discrepancies must be reported to IT immediately.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. DEVICE RETURN AND OFFBOARDING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+When an employee leaves NexaCore (regardless of reason):
+- All company devices must be returned to IT within 5 business days of last day
+- IT will ship a return kit to remote employees with prepaid label
+- Devices will be wiped and re-provisioned or decommissioned
+- Software licenses are de-provisioned same day as access termination
+
+IT works closely with HR for all offboarding. If devices are not returned, NexaCore reserves the right to charge the employee for the depreciated value of the equipment.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6. ASSET DISPOSAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Decommissioned devices are:
+1. Wiped using NIST SP 800-88 compliant tools
+2. Donated to partner refurbishment programs (if functional) or disposed via certified e-waste vendor
+3. Certificate of Destruction obtained for devices containing sensitive data
+
+Employees may not take home or keep decommissioned company equipment. Unauthorized retention is a policy violation.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7. KNOWN ISSUES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- ServiceNow asset data for Bangalore office is partially outdated — IT asset audit for APAC scheduled for Q4 2023.
+- SaaS catalog (Zylo) integration with procurement workflow not yet complete — manual approval tracking in spreadsheet currently used as backup.
+- Peripheral budget for 2024 has not been finalized as of August 2023; requests may face delays.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8. CONTACTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- IT Helpdesk: help.nexacore.internal | ext. 2000
+- IT Procurement: it-procurement@nexacore.com
+- IT Asset Management: it-assets@nexacore.com

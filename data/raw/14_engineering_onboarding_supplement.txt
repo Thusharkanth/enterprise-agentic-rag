@@ -1,0 +1,173 @@
+NEXACORE TECHNOLOGIES — ENGINEERING ONBOARDING SUPPLEMENT
+Document ID: ENG-ONBOARD-001 | Version: 1.0 | Last Updated: December 2023
+Owner: Engineering Leadership / Platform Team
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ABOUT THIS DOCUMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This document supplements the general New Employee Onboarding Guide (HR) with engineering-specific setup, processes, and context. If you are a new engineer at NexaCore, complete both documents. This one covers the technical environment, development workflow, and engineering culture.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. DEVELOPMENT ENVIRONMENT SETUP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1.1 Required Tools
+Install the following on your company MacBook (all available via IT portal or Homebrew):
+- Homebrew (package manager)
+- Git (latest version — not Apple's bundled version)
+- Docker Desktop (license covered by IT)
+- kubectl (Kubernetes CLI)
+- AWS CLI v2 (configure with your assigned IAM role)
+- Node.js v20 LTS (use nvm for version management)
+- Python 3.11+ (use pyenv for version management)
+- VS Code or JetBrains IDE (your choice — both licensed)
+- 1Password CLI (for secrets management integration)
+
+Detailed setup instructions: confluence.nexacore.internal/engineering/local-setup
+
+1.2 AWS Access
+Your AWS access is provisioned via AWS SSO. Login at: nexacore.awsapps.com/start
+You will be assigned roles based on your team. Default roles:
+- ReadOnly access to Production
+- PowerUser access to Staging and Development accounts
+- Admin access to your team's sandbox account
+
+Do not store AWS credentials in plaintext. Use AWS SSO CLI auth (`aws sso login`) or assume roles via scripts in the Engineering toolkit repo.
+
+1.3 GitHub Access
+Your team lead will add you to the nexacore-tech GitHub org. You should have access within your first day. Repositories are organized by team:
+- nexacore-tech/platform-* (platform team)
+- nexacore-tech/client-* (client solutions)
+- nexacore-tech/security-* (security team)
+- nexacore-tech/data-* (data engineering)
+
+Enable GitHub 2FA (authenticator app required, not SMS).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. DEVELOPMENT WORKFLOW
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+2.1 Branching Strategy
+NexaCore uses GitHub Flow:
+- main branch: always deployable to production
+- Feature branches: branch from main, prefix with type: feature/, fix/, chore/, hotfix/
+- PRs opened against main
+- No direct commits to main (protected branch)
+
+Branch naming convention: type/JIRA-TICKET-short-description
+Example: feature/NEX-1234-add-oauth-flow
+
+2.2 Commit Messages
+Use Conventional Commits format:
+- feat: new feature
+- fix: bug fix
+- docs: documentation change
+- chore: maintenance task
+- refactor: code refactor without behavior change
+- test: adding/updating tests
+
+Example: feat(auth): add OAuth2 PKCE flow for client-facing APIs
+
+2.3 Pull Requests
+All code changes require a PR. PR standards:
+- Include Jira ticket number in title: [NEX-1234] feat: add OAuth flow
+- Fill out the PR template (auto-populated from .github/PULL_REQUEST_TEMPLATE.md)
+- At least 2 approvals required (1 must be senior engineer or above for production code)
+- All CI checks must pass before merge
+- Author may NOT approve their own PR
+- Delete branch after merge
+
+2.4 Code Review Culture
+Code review is a collaboration, not a gatekeeping exercise. When reviewing:
+- Be specific and constructive
+- Distinguish between required changes (blocking) and suggestions (non-blocking)
+- Use GitHub's "comment" for discussions, "request changes" only for blocking issues
+- Aim to respond to review requests within 1 business day
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. CI/CD PIPELINE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NexaCore uses GitHub Actions as the primary CI/CD platform. On every PR:
+- Linting and formatting checks (ESLint/Prettier for JS; Black/Flake8 for Python)
+- Unit tests (must pass with ≥90% coverage on changed files)
+- SAST scan (SonarQube — findings block merge if Critical/High)
+- Docker image build (validates Dockerfile)
+
+On merge to main:
+- Automatic deployment to Staging environment
+- Integration tests run against Staging
+- Manual approval required for Production deployment (in most services)
+
+Deployment to production follows the Deployment SOP (ENG-SOP-007). Familiarize yourself with that document early.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. MONITORING AND OBSERVABILITY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NexaCore's observability stack:
+- Metrics: Datadog (primary), CloudWatch (AWS native)
+- Logs: Datadog Logs (forward from CloudWatch); ELK Stack for some legacy services
+- Traces: Datadog APM (distributed tracing)
+- Dashboards: Datadog dashboards per team (ask your team lead for links)
+- Alerting: PagerDuty (on-call rotation managed here)
+- Status Page: status.nexacore.com (Statuspage.io)
+
+Every service must have:
+- Health check endpoint (/health)
+- Structured logging (JSON format with trace ID)
+- Datadog APM instrumentation
+- SLI/SLO defined in Datadog (help from Platform team if needed)
+
+On-call rotation: You will be added to your team's PagerDuty rotation after your first 30 days. Your team lead will walk you through the rotation schedule and escalation procedures.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. ENGINEERING STANDARDS AND DOCUMENTATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Key standards documents every engineer should read in Week 1:
+- API Design Standards (ENG-STAND-002) — in this knowledge base
+- Deployment SOP (ENG-SOP-007) — in this knowledge base
+- Cybersecurity Guidelines (SEC-POL-002) — in this knowledge base
+- Cloud Architecture Notes (ARCH-REF-011) — in this knowledge base
+
+Internal Confluence spaces to bookmark:
+- confluence.nexacore.internal/engineering — engineering home
+- confluence.nexacore.internal/adr — Architecture Decision Records
+- confluence.nexacore.internal/runbooks — operational runbooks
+
+All significant technical decisions must be documented as an ADR (Architecture Decision Record). Template is in Confluence. Your team lead will guide you on when to write one.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6. ENGINEERING CULTURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- We value clarity over cleverness. Write code for the next person.
+- Incidents are learning opportunities, not blame events. Speak up early.
+- Documentation is part of the job, not optional.
+- Ask questions early. "I'll figure it out" costs more than a 5-minute Slack message.
+- We ship iteratively. Perfect is the enemy of done — but quality is non-negotiable.
+- On-call is shared responsibility. Don't let one person carry the pager forever.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7. KEY SLACK CHANNELS FOR ENGINEERS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- #engineering — General engineering discussions
+- #deployments — Deployment announcements and status
+- #incidents — Live incident coordination
+- #security-incidents — Security-specific incidents
+- #platform — Platform and infrastructure questions
+- #ask-anything — No question is too basic
+- #tech-radar — Evaluating new tools and technologies
+- Your team's private channel (your lead will add you)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8. CONTACTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Engineering Manager: eng-manager@nexacore.com
+- Platform Team: platform-team@nexacore.com
+- DevOps: devops@nexacore.com
+- IT Helpdesk (access issues): help.nexacore.internal

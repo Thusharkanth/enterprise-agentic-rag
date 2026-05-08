@@ -1,0 +1,126 @@
+NEXACORE TECHNOLOGIES — ARTIFICIAL INTELLIGENCE USAGE POLICY
+Version 1.4 | Effective: February 2024
+Issued by: Office of the CTO & Legal/Compliance Department
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PURPOSE AND SCOPE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This policy governs the use of Artificial Intelligence (AI) and Machine Learning (ML) tools — including generative AI platforms, large language models (LLMs), AI coding assistants, and AI-powered analytics tools — by NexaCore Technologies employees, contractors, and vendors acting on NexaCore's behalf.
+
+This policy applies to both internal use (for productivity and operations) and external use (in client-facing deliverables and products). All personnel must review and comply with this policy.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 1: APPROVED AI TOOLS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+As of Q1 2024, the following AI tools are approved for use at NexaCore:
+
+APPROVED FOR ALL EMPLOYEES:
+- Microsoft Copilot (via M365 license) — document drafting, email, summarization
+- GitHub Copilot — code completion and suggestions (Engineering only)
+- Grammarly Business — writing assistance
+- NexaCore Internal AI Assistant (beta) — internal knowledge base queries
+
+APPROVED FOR SPECIFIC TEAMS WITH MANAGER SIGN-OFF:
+- OpenAI API (GPT-4) — for R&D and product development teams
+- Google Vertex AI — for data science and ML engineering teams
+- AWS Bedrock — for cloud and infrastructure teams with approved use cases
+
+NOT APPROVED (DO NOT USE FOR WORK PURPOSES):
+- Consumer versions of ChatGPT (free or Plus tier)
+- Claude.ai (personal accounts)
+- Bard/Gemini consumer apps
+- Meta AI or any social-media-integrated AI tools
+- Any AI tool not on the approved list above
+
+Employees who wish to evaluate a new AI tool must submit a request to the AI Governance Committee via it.nexacore.internal/ai-tool-request. Unapproved tool usage may result in disciplinary action.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 2: DATA CLASSIFICATION AND AI USAGE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NexaCore classifies data into four tiers:
+
+TIER 1 — PUBLIC: Marketing content, job postings, published reports.
+TIER 2 — INTERNAL: General internal communications, non-sensitive processes.
+TIER 3 — CONFIDENTIAL: Client data, contracts, financial data, employee records.
+TIER 4 — RESTRICTED: PII, PHI, PCI data, government contract data, trade secrets.
+
+AI USAGE RULES BY TIER:
+- Tier 1 & 2: May be used with approved AI tools freely.
+- Tier 3: May only be used with approved enterprise AI tools that have signed DPAs with NexaCore. Must not be entered into any consumer AI tools.
+- Tier 4: MUST NOT be submitted to any AI tool under any circumstance. This includes anonymized or paraphrased versions of restricted data.
+
+If you are unsure of your data's classification, contact the Data Governance team at data-governance@nexacore.com before proceeding.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 3: GENERATIVE AI IN CLIENT DELIVERABLES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+3.1 Disclosure Requirements
+If AI-generated content constitutes more than 20% of a client-facing document, code, or report, this must be disclosed to the client unless the client has explicitly waived this requirement in writing.
+
+3.2 Human Review Mandatory
+All AI-generated content included in client deliverables must be reviewed, validated, and approved by a human subject matter expert before submission. AI outputs are to be treated as drafts, not final work products.
+
+3.3 Prohibited Uses in Client Work
+- Do not use AI to fabricate citations, references, or statistics
+- Do not submit AI-generated code to clients without security review
+- Do not use AI to make conclusions in legal, medical, or financial contexts without expert review
+- Do not represent AI-generated work as entirely human-produced when asked
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 4: AI IN SOFTWARE DEVELOPMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+4.1 GitHub Copilot Usage
+GitHub Copilot is available to all Engineering staff. Developers must:
+- Review all Copilot suggestions before committing
+- Not accept suggestions for security-sensitive code (authentication, encryption, access control) without peer review
+- Be aware that Copilot may suggest deprecated or insecure patterns
+
+4.2 AI-Assisted Code Review
+AI may be used to assist in code reviews but must not replace human review. Any PR touching critical infrastructure, client-facing APIs, or security modules requires at least one human reviewer regardless of AI assistance.
+
+4.3 Intellectual Property
+Developers should be aware that AI-generated code may have uncertain IP status. For client work, do not use AI to generate entire modules or features without legal review of IP implications. NexaCore's Legal team is conducting an ongoing review of AI-generated code IP risks (status: pending as of Q1 2024).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 5: AI ETHICS AND RESPONSIBLE USE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+5.1 Bias and Fairness
+AI tools can reflect and amplify biases present in their training data. Employees must critically evaluate AI outputs — especially when used in HR-related decisions, hiring, performance evaluation, or any context affecting people's livelihoods.
+
+AI must not be used as the sole or primary basis for decisions related to hiring, promotion, termination, or compensation.
+
+5.2 Transparency
+Do not misrepresent AI-generated content as your own original work in internal contexts where attribution matters. This includes reports to leadership, compliance filings, and academic certifications tied to your employment.
+
+5.3 Environmental Awareness
+NexaCore is committed to sustainable technology use. Be mindful that large AI model inference consumes significant energy. Avoid unnecessary or excessive use of high-compute AI tasks when simpler alternatives exist.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 6: REPORTING AND GOVERNANCE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+6.1 AI Governance Committee
+NexaCore has established an AI Governance Committee composed of representatives from Legal, IT Security, Engineering, and HR. The committee meets quarterly to review AI tool usage, approve new tools, and update this policy.
+
+6.2 Incident Reporting
+If you suspect a data breach, IP issue, or ethical concern related to AI usage, report it immediately to:
+- Security incidents: security@nexacore.com
+- Ethical concerns: ethics@nexacore.com
+- Policy questions: cto-office@nexacore.com
+
+6.3 Policy Review
+This policy is reviewed quarterly and updated as the AI landscape evolves. Employees will be notified of material changes via email and Slack.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ACKNOWLEDGMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+All employees must complete the "AI Policy Acknowledgment" in the LMS at learn.nexacore.internal within 14 days of this policy's effective date or their hire date (whichever is later).
+
+Questions? Contact: cto-office@nexacore.com

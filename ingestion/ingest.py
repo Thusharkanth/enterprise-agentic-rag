@@ -1,25 +1,32 @@
-from langchain_community.document_loaders import TextLoader
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_community.embeddings import OllamaEmbeddings
-from langchain_community.vectorstores import Chroma
+from .loader import load_documents
+from .chunker import split_documents
 
-# 1. Load your dataset
-loader = TextLoader("data/hr_policy_dataset.md")
-documents = loader.load()
+from services.embeddings import get_embedding_model
+from vectorstore.vectordb import create_vector_store
 
-# 2. Split into chunks
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
 
-docs = text_splitter.split_documents(documents)
+def main():
 
-# 3. Create embeddings (Ollama)
-embeddings = OllamaEmbeddings(model="llama3")
+    print("\n========== INGESTION PIPELINE STARTED ==========\n")
 
-# 4. Store in Chroma DB
-vectorstore = Chroma.from_documents(
-    docs, embedding=embeddings, persist_directory="rag/vectordb"
-)
+    # STEP 1 — Load Documents
+    print("Loading documents...")
+    documents = load_documents()
 
-vectorstore.persist()
+    # STEP 2 — Split Documents
+    print("Splitting documents into chunks...")
+    chunks = split_documents(documents)
 
-print("✅ Ingestion complete. Vector DB created.")
+    # STEP 3 — Initialize Embeddings
+    print("Initializing embedding model...")
+    embedding_model = get_embedding_model()
+
+    # STEP 4 — Create Vector Store
+    print("Creating ChromaDB vector store...")
+    create_vector_store(chunks, embedding_model)
+
+    print("\n========== INGESTION COMPLETED ==========\n")
+
+
+if __name__ == "__main__":
+    main()

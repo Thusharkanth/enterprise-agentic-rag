@@ -1,0 +1,147 @@
+NEXACORE TECHNOLOGIES — SOFTWARE DEPLOYMENT STANDARD OPERATING PROCEDURE (SOP)
+Document ID: ENG-SOP-007 | Version: 4.0 | Last Revised: January 2024
+Owner: Engineering Operations / DevOps Team
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. PURPOSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This SOP defines the standard process for deploying software changes to NexaCore's production environments. It applies to all engineering teams deploying internal products, client-managed systems, or infrastructure changes. The goal is to ensure deployments are safe, traceable, and reversible.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. DEPLOYMENT ENVIRONMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NexaCore uses a four-tier environment model:
+
+DEV → QA → STAGING → PRODUCTION
+
+- DEV: Local or shared developer environment. No access controls required.
+- QA: Automated and manual testing. Mirrors production schema. Managed by QA team.
+- STAGING: Pre-production environment with production-equivalent configurations. Used for final validation and client UAT.
+- PRODUCTION: Live environment serving real users/clients. Requires full approval chain.
+
+All code must pass through each environment in sequence. Bypassing environments requires written approval from the VP of Engineering.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. PRE-DEPLOYMENT REQUIREMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Before any production deployment is initiated:
+
+☐ 3.1 Code Review
+All changes must be reviewed and approved by at least two engineers (one must be a senior engineer or tech lead). PRs must not be merged by the author. For security-sensitive code, a security engineer must be included as a reviewer.
+
+☐ 3.2 Automated Testing
+- Unit tests: Must pass with ≥90% code coverage for modified modules
+- Integration tests: Must pass in QA environment
+- Regression suite: Must pass in Staging environment
+- No open Critical or High severity test failures allowed
+
+☐ 3.3 Security Scan
+All production-bound code must pass a SAST (Static Application Security Testing) scan via SonarQube. Any High or Critical findings must be resolved before deployment. Medium findings must be documented and have an approved remediation plan.
+
+☐ 3.4 Deployment Plan
+A deployment plan document must be created in Confluence (template: ENG-TMPL-DEPLOY). It must include:
+- Summary of changes (what and why)
+- Dependencies and downstream impact
+- Deployment steps (step-by-step commands or pipeline run instructions)
+- Rollback procedure
+- Monitoring and validation checks post-deploy
+- Estimated deployment window and duration
+- Who is on-call during deployment
+
+☐ 3.5 Change Request Ticket
+A Jira Change Request (CR) ticket must be opened and approved by the Engineering Manager and, for production, by the Change Advisory Board (CAB). CAB reviews happen every Tuesday and Thursday at 2:00 PM CT. Emergency CRs can be approved by the VP of Engineering directly.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. DEPLOYMENT WINDOWS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Standard Deployment Windows (Production):
+- Tuesday: 10:00 PM – 2:00 AM CT
+- Thursday: 10:00 PM – 2:00 AM CT
+- Saturday: 8:00 PM – 4:00 AM CT (extended window for major releases)
+
+Blackout Periods (NO deployments without emergency approval):
+- Last 2 weeks of each quarter (financial close period)
+- Federal holidays
+- Client-defined blackout periods (listed in each client's SLA appendix)
+- Monday mornings (7:00 AM – 12:00 PM CT) — high traffic period
+
+Emergency deployments outside these windows require VP of Engineering and on-call manager approval.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. DEPLOYMENT PROCEDURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Step 1: Pre-Deployment Notification
+- Notify the #deployments Slack channel at least 2 hours before deployment
+- Notify client POC (if client-facing system) at least 24 hours in advance via email
+- Confirm on-call engineer is available for the deployment window
+
+Step 2: Enable Maintenance Mode (if applicable)
+- For web applications: enable maintenance page via load balancer config
+- Notify customer support team so they can handle inbound queries during window
+
+Step 3: Backup
+- Trigger database snapshot in AWS RDS / Azure SQL before any schema migrations
+- Confirm backup completion before proceeding (do not skip)
+
+Step 4: Deploy via CI/CD Pipeline
+- All deployments must be executed via the approved CI/CD pipeline (Jenkins or GitHub Actions, depending on project)
+- Manual deployments via SSH are prohibited in production except in emergency break-glass scenarios (document all manual steps)
+- Monitor pipeline progress in real-time; do not abandon a running pipeline without notifying the team
+
+Step 5: Smoke Testing
+- Run the smoke test suite immediately after deployment
+- Validate critical user flows manually (login, core feature, API health endpoints)
+- Check error rates in Datadog/New Relic for 15 minutes post-deploy
+
+Step 6: Disable Maintenance Mode
+- Restore traffic only after smoke tests pass
+- Send all-clear notification in #deployments Slack channel
+
+Step 7: Post-Deployment Monitoring
+- Monitor for 60 minutes post-deployment
+- Watch: error rates, latency (p95, p99), CPU/memory, business KPI dashboards
+- If any alert fires, follow Incident Management Workflow (see INC-SOP-003)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6. ROLLBACK PROCEDURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+If critical issues are detected post-deployment:
+
+1. Lead engineer calls rollback decision — must occur within 30 minutes of issue detection
+2. Trigger rollback pipeline (or revert to last stable tag/release in GitHub)
+3. Restore database backup if schema migration was part of the deployment
+4. Notify stakeholders via Slack (#deployments, #incidents)
+5. Notify client (if applicable) within 1 hour of rollback
+6. Open a post-mortem Jira ticket within 24 hours of rollback
+
+Note: Rollback of database migrations is complex and may not always be feasible. Always assess data impact before triggering a DB rollback.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7. DOCUMENTATION AND AUDIT TRAIL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+All deployments must be logged in the Deployment Registry (Confluence space: ENG > Deployments). Log entries must include:
+- Date and time of deployment
+- Deploying engineer
+- Systems/services affected
+- CR ticket number
+- Outcome (success / partial / rollback)
+- Post-deployment notes
+
+Deployment logs are retained for 24 months for compliance purposes.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8. CONTACTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- DevOps On-Call: devops-oncall@nexacore.com | PagerDuty rotation
+- Engineering Manager: eng-manager@nexacore.com
+- VP Engineering: vp-eng@nexacore.com
+- Security Review: security@nexacore.com
+- Client Communications: client-success@nexacore.com

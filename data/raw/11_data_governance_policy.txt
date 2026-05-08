@@ -1,0 +1,143 @@
+NEXACORE TECHNOLOGIES — DATA GOVERNANCE POLICY
+Document ID: DG-POL-001 | Version: 1.2 | Last Updated: October 2023
+Owner: Data Governance Team & Legal/Compliance
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. PURPOSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This policy defines how NexaCore Technologies manages data assets throughout their lifecycle — from creation and classification to storage, use, sharing, and disposal. Proper data governance is essential to meeting our regulatory obligations and maintaining client trust.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. DATA CLASSIFICATION FRAMEWORK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NexaCore classifies all data into four tiers. Every data asset must be classified at the time of creation or acquisition.
+
+TIER 1 — PUBLIC
+Description: Information intended for public access.
+Examples: Marketing materials, public website content, press releases, published case studies.
+Handling: No restrictions on access or distribution.
+
+TIER 2 — INTERNAL
+Description: General business information not meant for public release but not sensitive.
+Examples: Internal memos, meeting notes, process documentation, organizational charts.
+Handling: Accessible to all employees. Do not share externally without approval.
+
+TIER 3 — CONFIDENTIAL
+Description: Sensitive business or client information that could cause harm if disclosed.
+Examples: Client contracts, financial projections, employee compensation data, vendor agreements, unreleased product roadmaps, client infrastructure details.
+Handling:
+- Access on need-to-know basis only
+- Stored only in approved encrypted systems
+- Requires DPA when shared with third-party AI tools or vendors
+- Must not be emailed externally without encryption
+
+TIER 4 — RESTRICTED
+Description: Highest sensitivity. Legal, regulatory, or contractual obligations require strict protection.
+Examples:
+- Personally Identifiable Information (PII): Name + email, SSN, government ID, financial account numbers
+- Protected Health Information (PHI): Any health records under HIPAA scope
+- Payment Card Industry (PCI) data: Card numbers, CVV, cardholder data
+- Government contract data: Classified or CUI (Controlled Unclassified Information)
+- Trade secrets and proprietary source code
+Handling:
+- Access strictly limited and logged
+- Must be stored in dedicated, compliance-certified systems
+- Transmission only via encrypted secure file transfer (not email)
+- Must never be entered into AI tools of any kind
+- Retention limited by regulation; disposal requires certificate of destruction
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. DATA OWNERSHIP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Each data asset must have an assigned Data Owner — a department head or senior leader responsible for:
+- Determining and reviewing classification
+- Approving access requests
+- Ensuring data is handled in accordance with this policy
+- Conducting annual data asset reviews
+
+Data Stewards (typically managers or senior individual contributors) assist the Data Owner with day-to-day governance tasks.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. DATA RETENTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Retention schedules are defined by data type and regulatory requirement:
+
+| Data Type                        | Retention Period      | Notes                            |
+|----------------------------------|-----------------------|----------------------------------|
+| Employee records                 | 7 years post-departure| Per FLSA and state requirements  |
+| Client contracts                 | 10 years post-expiry  | Legal hold if in litigation      |
+| Financial records                | 7 years               | IRS / SOX requirements           |
+| Security logs / audit trails     | 24 months             | SOC 2 requirement                |
+| Support tickets                  | 3 years               | Per client SLA agreements        |
+| PHI (healthcare client data)     | 6 years minimum       | HIPAA requirement                |
+| PCI data (cardholder)            | Do not retain         | Tokenize immediately             |
+| Marketing / general comms        | 2 years               | No regulatory requirement        |
+
+Data should not be retained beyond its required retention period. Disposal must follow the secure disposal process defined in Section 6.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. DATA ACCESS AND SHARING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+5.1 Internal Access
+Access to Tier 3 and Tier 4 data must be requested through the IT helpdesk and approved by the data owner. Access logs are reviewed quarterly by the Security team.
+
+5.2 External Sharing
+Tier 3 data shared externally (with clients, vendors, or partners) requires:
+- A signed Data Processing Agreement (DPA) or NDA in place
+- Encrypted transmission
+- Data Owner approval
+
+Tier 4 data must not be shared externally except where legally required and only with explicit Legal and CISO approval.
+
+5.3 Cross-Border Data Transfer
+Transfer of personal data across borders (e.g., from EU to US) must comply with applicable transfer mechanisms (Standard Contractual Clauses for GDPR-scope data). Contact Legal before initiating any cross-border data transfer involving Tier 3/4 data.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6. DATA DISPOSAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+When data reaches end of retention or is no longer needed:
+- Digital data: Cryptographic erasure or secure deletion (DoD 5220.22-M standard or equivalent)
+- Physical media: Shredding via certified destruction vendor (IT to coordinate)
+- Cloud data: Confirm deletion through provider's deletion API + log retention confirmation
+- Certificate of Destruction is required for Tier 4 data disposal
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7. DATA BREACH NOTIFICATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+In the event of a data breach involving Tier 3 or Tier 4 data:
+- Internal notification: Security team within 1 hour of discovery
+- Legal & Compliance: Within 2 hours
+- Client notification: Per contract terms (usually 24–72 hours)
+- Regulatory notification: GDPR — 72 hours to supervisory authority; HIPAA — 60 days to HHS; State breach laws vary
+
+Full breach response procedure: See Incident Management Workflow (INC-SOP-003).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8. TRAINING AND AWARENESS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+All employees must complete the annual Data Privacy and Classification training module in the LMS. Employees handling Tier 3/4 data must complete additional role-specific training. Failure to complete training results in access restrictions until completion.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+9. OPEN ITEMS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Data asset registry: In progress. Target completion: Q2 2024. Currently many legacy data assets are not formally classified.
+- Automated data discovery tooling: Evaluating Varonis vs Securiti.ai — decision pending ARB
+- Cross-border transfer documentation: Not all transfer scenarios are covered; Legal reviewing gaps
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+10. CONTACTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Data Governance Team: data-governance@nexacore.com
+- Legal/Compliance: legal@nexacore.com
+- Privacy Officer: privacy@nexacore.com
+- Security: security@nexacore.com

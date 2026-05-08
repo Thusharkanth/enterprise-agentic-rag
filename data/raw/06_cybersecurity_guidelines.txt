@@ -1,0 +1,169 @@
+NEXACORE TECHNOLOGIES — CYBERSECURITY GUIDELINES
+Document ID: SEC-POL-002 | Version: 3.1 | Last Reviewed: February 2024
+Owner: Information Security Team (CISO Office)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. PURPOSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This document establishes the minimum cybersecurity standards all NexaCore employees, contractors, and vendors must follow when handling company or client systems and data. NexaCore serves clients in regulated industries including healthcare and finance, making security compliance non-negotiable.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. ACCESS CONTROL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+2.1 Principle of Least Privilege
+All access to systems and data must follow the principle of least privilege. Employees should have only the minimum access required to perform their job duties. Access rights are reviewed quarterly by the Security team in coordination with department managers.
+
+2.2 Multi-Factor Authentication (MFA)
+MFA is mandatory for all NexaCore systems, including:
+- Email (M365)
+- VPN
+- GitHub
+- Cloud consoles (AWS, Azure, GCP)
+- Any system containing client or Tier 3/4 data
+
+MFA must use an authenticator app (Microsoft Authenticator or Authy). SMS-based MFA is not acceptable for production systems.
+
+2.3 Password Policy
+- Minimum 14 characters
+- Must include uppercase, lowercase, number, and symbol
+- Must not reuse the last 12 passwords
+- Must be changed every 180 days
+- Must be stored in 1Password (company-managed)
+- Sharing passwords between employees is strictly prohibited
+
+2.4 Privileged Access
+Privileged accounts (admin/root/sudo access) must:
+- Be separate from standard user accounts
+- Use hardware security keys (YubiKey) for MFA
+- Be logged and audited via PAM (Privileged Access Management) tool
+- Never be used for routine tasks; only for specific admin activities
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. DEVICE SECURITY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+3.1 Company Devices
+All company-issued devices are enrolled in NexaCore's MDM (Mobile Device Management) platform. The following configurations are automatically applied:
+- Full disk encryption (FileVault for Mac, BitLocker for Windows)
+- Screen lock after 5 minutes of inactivity
+- Remote wipe capability
+- Endpoint Detection and Response (EDR) agent installed
+
+3.2 Personal Devices (BYOD)
+Personal devices may not access NexaCore internal systems or client data unless:
+- The device is enrolled in MDM (available via IT)
+- Minimum OS version requirements are met
+- Device has active antivirus protection
+
+Personal devices must never store client data locally.
+
+3.3 Lost or Stolen Devices
+Report immediately to:
+- IT Security: security@nexacore.com
+- IT Helpdesk: help.nexacore.internal
+- Your manager
+
+Remote wipe will be initiated within 1 hour of confirmed report. Delay in reporting may result in disciplinary action.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. DATA SECURITY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+4.1 Data Classification (Summary)
+NexaCore uses a four-tier data classification model (detailed in AI Policy and Data Governance Policy):
+- Tier 1: Public
+- Tier 2: Internal
+- Tier 3: Confidential
+- Tier 4: Restricted (PII, PHI, PCI, trade secrets)
+
+4.2 Data Handling Rules
+- Tier 3/4 data must only be stored in approved, encrypted repositories
+- Do not email Tier 3/4 data externally without encryption
+- Do not store Tier 3/4 data on personal devices, USBs, or personal cloud storage (Google Drive personal, Dropbox, etc.)
+- Tier 4 data must not be transmitted via email under any circumstances — use the secure file transfer portal
+
+4.3 Encryption Standards
+- Data at rest: AES-256 minimum
+- Data in transit: TLS 1.2 minimum (TLS 1.3 preferred)
+- Database encryption: Enforced at the platform level for all AWS RDS and Azure SQL instances
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. NETWORK SECURITY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+5.1 VPN Usage
+All remote access to NexaCore internal systems must route through the corporate VPN (Cisco AnyConnect). Employees working from home or any external location must connect to VPN before accessing any internal systems.
+
+5.2 Wi-Fi
+When working from a public location (café, hotel, airport):
+- Always use VPN
+- Avoid connecting to open/unsecured networks
+- Use a mobile hotspot if VPN is unavailable
+
+5.3 Network Segmentation
+NexaCore's internal network is segmented into zones:
+- Corporate Zone: General employee access
+- Development Zone: Engineering and DevOps only
+- Client DMZ: Client-facing systems, hardened perimeter
+- Management Zone: Infrastructure and security tools, restricted access
+
+Cross-zone access requires a formal access request and security approval.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6. PHISHING AND SOCIAL ENGINEERING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- NexaCore conducts quarterly phishing simulations. Failure rates are tracked and repeated failures trigger mandatory retraining.
+- Never click links or open attachments from unknown senders
+- Verify unexpected wire transfer requests or credential requests by phone before acting
+- Report suspicious emails to: phishing@nexacore.com or use the "Report Phishing" button in Outlook
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7. VULNERABILITY MANAGEMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Critical vulnerabilities (CVSS 9.0+): Must be patched within 24 hours
+- High vulnerabilities (CVSS 7.0–8.9): Must be patched within 7 days
+- Medium vulnerabilities: Must be patched within 30 days
+- Low vulnerabilities: Addressed in regular patch cycles (quarterly)
+
+Security patches to OS and critical software are pushed automatically via MDM and configuration management tools. Engineers are responsible for patching dependencies in code repositories.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8. SECURITY INCIDENT REPORTING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Any suspected security incident must be reported IMMEDIATELY:
+- Email: security@nexacore.com
+- 24/7 Hotline: ext. 9911 (internal) or 1-800-NEX-SEC (external)
+- Slack: #security-incidents
+
+DO NOT attempt to investigate a suspected breach on your own. DO NOT delete logs or evidence. Preserve everything and notify the security team immediately.
+
+For full incident response procedures, see: Incident Management Workflow (INC-SOP-003).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+9. COMPLIANCE FRAMEWORKS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NexaCore adheres to the following frameworks depending on client requirements:
+- SOC 2 Type II (company-wide)
+- HIPAA (healthcare clients)
+- PCI-DSS (financial services clients)
+- NIST Cybersecurity Framework (government clients)
+- ISO 27001 (in progress — target certification: Q3 2024)
+
+Compliance requirements flow down to employees through training, tooling, and policy. Refer to Compliance Team for client-specific requirements.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+10. TRAINING REQUIREMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+All employees:
+- Annual Security Awareness Training (mandatory, via LMS)
+- Phishing simulation quarterly participation
+- Role-specific training for developers (OWASP Top 10), system admins, and support staff
+
+Non-completion results in access suspension until training is completed.

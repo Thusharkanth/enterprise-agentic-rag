@@ -1,0 +1,126 @@
+NEXACORE TECHNOLOGIES — VENDOR MANAGEMENT POLICY
+Document ID: PROC-POL-001 | Version: 1.0 | Last Updated: July 2023
+Owner: Procurement & Legal Department
+
+STATUS: This document is a first draft. Some sections are incomplete pending input from Finance and Legal. Sections marked [TBD] are placeholders.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. PURPOSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This policy establishes NexaCore's framework for selecting, onboarding, managing, and offboarding third-party vendors. As a company that handles sensitive client data across regulated industries, vendor risk management is critical to our security and compliance posture.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. VENDOR CATEGORIES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Vendors are categorized based on the level of access they have to NexaCore systems and data:
+
+CRITICAL VENDOR: Has access to Tier 3/4 data, processes client data, or is a single point of failure for a critical business process.
+Examples: Cloud providers (AWS, Azure), HR SaaS (Workday), security tools, payment processors.
+
+HIGH RISK VENDOR: Has access to internal systems or Tier 2/3 data but not client-facing critical systems.
+Examples: Collaboration tools (Slack, Zoom), monitoring tools (Datadog), developer tools (GitHub).
+
+STANDARD VENDOR: Provides products or services with no access to internal systems or sensitive data.
+Examples: Office supplies, event venues, non-SaaS software licenses.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. VENDOR SELECTION AND ONBOARDING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+3.1 Procurement Initiation
+All new vendor relationships must be initiated through the Procurement team. Employees may not enter into vendor agreements independently. A Vendor Request Form must be submitted via the procurement portal (procurement.nexacore.internal).
+
+3.2 Due Diligence Requirements
+
+For CRITICAL vendors:
+- Security questionnaire (based on SIG Lite or CAIQ)
+- Review of SOC 2 Type II or ISO 27001 certification
+- Legal review and DPA/MSA negotiation
+- Business continuity and DR capability assessment
+- Reference checks
+- Finance sign-off on budget
+
+For HIGH RISK vendors:
+- Simplified security questionnaire
+- Review of available security documentation
+- Legal review of standard contract terms
+- Finance sign-off
+
+For STANDARD vendors:
+- Procurement team approval
+- Basic vendor screening (no security review required)
+
+3.3 Contracts
+All vendor contracts must be reviewed and executed by the Legal team. No employee has authority to sign a vendor contract without Legal approval. Standard contract templates are available via Legal (legal@nexacore.com).
+
+Minimum contract requirements for Critical vendors:
+- Data Processing Agreement (DPA) if handling personal data
+- SLA with uptime guarantees and remedies
+- Right to audit clause
+- Data return/destruction on contract termination
+- Incident notification requirements (NexaCore must be notified within 24 hours of suspected breach)
+- Insurance requirements [TBD — Legal to define minimum coverage by vendor type]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. ONGOING VENDOR MANAGEMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+4.1 Vendor Register
+All active vendors are tracked in the Vendor Register (procurement.nexacore.internal/vendors). Procurement maintains this register. Business owners must notify Procurement of any changes to vendor scope or access.
+
+4.2 Periodic Reviews
+- Critical vendors: Annual security reassessment + executive relationship review
+- High Risk vendors: Annual review (simplified)
+- Standard vendors: No periodic review required unless scope changes
+
+4.3 Performance Management
+Business owners (the team or department that owns the vendor relationship) are responsible for monitoring vendor performance against SLAs and escalating issues. Persistent performance issues may be grounds for contract termination.
+
+4.4 Vendor Access Management
+Vendor access to NexaCore systems must be:
+- Limited to what is necessary (least privilege)
+- Time-bound — provisioned for the engagement duration
+- Logged and reviewed quarterly by IT Security
+- Deprovisioned immediately upon contract end
+
+[TBD — formal vendor access request form and process to be documented by IT. Currently handled informally via helpdesk tickets.]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. VENDOR OFFBOARDING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+When a vendor relationship ends:
+1. Business owner notifies Procurement at least 30 days before intended end date
+2. IT deprovisions all vendor access on the contract end date
+3. Vendor must destroy or return all NexaCore data per contract terms
+4. Certificate of Data Destruction obtained for Critical vendors
+5. Vendor record archived in Vendor Register
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6. FOURTH-PARTY RISK (SUB-PROCESSORS)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Critical vendors that use sub-processors to handle NexaCore data must disclose their sub-processor list. NexaCore reserves the right to object to new sub-processors. This requirement must be written into the DPA.
+
+[TBD — Fourth-party risk management process is not yet fully defined. Interim: Legal tracks sub-processor notifications manually.]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7. OPEN ITEMS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Vendor access request process not yet formally documented (IT to own)
+- Insurance minimums not defined (Legal action item)
+- Fourth-party risk process TBD
+- Vendor Register migration from spreadsheet to procurement portal in progress (ETA: Q4 2023)
+- Security questionnaire template not yet standardized — currently using ad-hoc questionnaires
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8. CONTACTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Procurement: procurement@nexacore.com
+- Legal (contracts): legal@nexacore.com
+- Security (vendor assessments): security@nexacore.com
+- Finance (budget approval): finance@nexacore.com

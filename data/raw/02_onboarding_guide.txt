@@ -1,0 +1,124 @@
+NEXACORE TECHNOLOGIES — NEW EMPLOYEE ONBOARDING GUIDE
+Version 2.1 | Effective: March 2024
+Prepared by: People Operations Team
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WELCOME TO NEXACORE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Welcome aboard! We're excited to have you join the NexaCore Technologies family. This guide will walk you through everything you need to get up and running in your first 30 days. Your first point of contact for any questions is your assigned onboarding buddy and your direct manager.
+
+NexaCore serves clients across healthcare, financial services, retail, and government — so depending on your team, you may be exposed to regulated data environments early on. Please take all compliance training seriously.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DAY 1 CHECKLIST
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+☐ Arrive at your office location by 9:00 AM (or join the virtual orientation link sent via email)
+☐ Meet with HR to complete remaining paperwork (I-9, tax forms, direct deposit)
+☐ Receive your company laptop, access badge, and peripherals from IT
+☐ Set up your NexaCore email (firstname.lastname@nexacore.com)
+☐ Configure MFA (Multi-Factor Authentication) on your account — MANDATORY before accessing any systems
+☐ Join your team's Slack workspace and introduce yourself in #general
+☐ Review and sign your NDA and IP Assignment Agreement
+☐ Attend the New Employee Orientation session at 11:00 AM (virtual link or Room 3A)
+☐ Lunch with your manager or onboarding buddy
+☐ Review this onboarding guide fully
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WEEK 1 PRIORITIES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Complete Mandatory Training Modules (via LMS at learn.nexacore.internal):
+   - NexaCore Code of Conduct (30 min)
+   - Information Security Awareness — Level 1 (45 min)
+   - Data Privacy and Confidentiality (30 min)
+   - Workplace Safety and Anti-Harassment (45 min)
+   All four modules must be completed within your first 5 business days.
+
+2. System Access Setup:
+   - VPN: Download NexaCore VPN client from IT portal (it.nexacore.internal)
+   - Password Manager: Enroll in 1Password (license issued by IT)
+   - Jira & Confluence: Request access via IT helpdesk ticket
+   - GitHub: Your team lead will add you to the appropriate org and repos
+
+3. Meet Your Stakeholders:
+   Schedule 30-minute intro calls with at least 3 people from your immediate team and 1 person from a cross-functional team (e.g., if you're in Engineering, meet someone from DevOps or QA).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WEEK 2–4 MILESTONES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+By the end of your first month, you should have:
+
+☐ Completed all mandatory training modules
+☐ Gained access to all systems required for your role
+☐ Shadowed at least 2 client calls or internal project meetings
+☐ Submitted your first timesheet via Workday (due every Friday by 5:00 PM)
+☐ Set up your 30-60-90 day plan with your manager
+☐ Completed the benefits enrollment form (deadline: 30 days from start date)
+☐ Attended at least one team standup or sprint review
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+KEY SYSTEMS AND TOOLS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+| System           | Purpose                          | Access Via                    |
+|------------------|----------------------------------|-------------------------------|
+| Workday          | HR, timesheets, payroll          | workday.nexacore.com          |
+| Jira             | Project and task tracking        | jira.nexacore.internal        |
+| Confluence       | Internal wiki and documentation  | confluence.nexacore.internal  |
+| Slack            | Team communication               | nexacore.slack.com            |
+| GitHub           | Code repositories                | github.com/nexacore-tech      |
+| 1Password        | Password management              | Installed by IT               |
+| Zoom             | Video conferencing               | zoom.us (SSO enabled)         |
+| LMS              | Training and certifications      | learn.nexacore.internal       |
+| IT Helpdesk      | Support tickets                  | help.nexacore.internal        |
+| HR Portal        | Benefits, PTO, pay stubs         | hr.nexacore.internal          |
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+IT EQUIPMENT AND SETUP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+All employees receive a company-issued laptop. Engineers and technical roles receive a MacBook Pro (M3, 16GB RAM). Non-technical roles typically receive a Dell Latitude or equivalent. You may request additional peripherals (monitor, keyboard, docking station) via IT — one peripheral bundle is included for all full-time employees.
+
+Do not install software not approved by IT. A list of approved applications is maintained at it.nexacore.internal/approved-software. For exceptions, submit a software approval request with your manager's sign-off.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REMOTE WORK SETUP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NexaCore supports hybrid work. Most roles require 2–3 days in office per week unless otherwise stated in your offer letter. When working remotely:
+- Always connect through NexaCore VPN before accessing internal systems
+- Do not use public Wi-Fi without VPN active
+- Ensure your home workspace meets minimum security standards (private network, screen lock enabled)
+- You are still expected to be available during core hours: 10:00 AM – 4:00 PM local time
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PAYROLL AND BENEFITS REMINDER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+You are paid bi-weekly on Fridays via direct deposit. Ensure your banking details are entered in Workday within your first 3 days. Benefits enrollment must be completed within 30 days of your start date — after this window, you will need to wait for Open Enrollment in November.
+
+Note: Your first paycheck may be delayed by up to one pay cycle depending on your start date. Contact payroll@nexacore.com if you have concerns.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WHO TO CONTACT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- HR Questions: hr@nexacore.com | ext. 1000
+- IT Support: help.nexacore.internal | ext. 2000
+- Payroll: payroll@nexacore.com | ext. 1020
+- Security Incidents: security@nexacore.com | ext. 9911 (24/7)
+- Your Onboarding Buddy: Assigned in your welcome email
+- Your Manager: Listed in your offer letter
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+A NOTE ON CULTURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NexaCore is a collaborative, delivery-focused environment. We value transparency, ownership, and continuous improvement. Don't be afraid to ask questions — everyone here was new once. Our #ask-anything Slack channel is a great place to post questions without feeling judged.
+
+We celebrate wins, learn from failures, and always put the client first. Welcome to the team.
+
+— People Operations, NexaCore Technologies

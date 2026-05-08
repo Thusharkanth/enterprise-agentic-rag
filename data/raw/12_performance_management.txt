@@ -1,0 +1,138 @@
+NEXACORE TECHNOLOGIES — PERFORMANCE MANAGEMENT POLICY
+Document ID: HR-POL-005 | Version: 1.3 | Last Updated: September 2023
+Owner: Human Resources Department
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. PURPOSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This policy outlines NexaCore's approach to employee performance management — setting expectations, providing ongoing feedback, conducting formal reviews, and managing underperformance. A consistent performance management process ensures fairness, clarity, and alignment with company goals.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. PERFORMANCE REVIEW CYCLE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+2.1 Annual Review
+NexaCore conducts formal annual performance reviews in Q4 (October–November). The review cycle consists of:
+
+1. Employee Self-Assessment: Employees complete a self-evaluation form in Workday by October 15
+2. Manager Review: Managers complete their assessment by November 1
+3. Calibration: Department heads and HR calibrate ratings across the team (first two weeks of November)
+4. Review Meeting: Manager and employee meet to discuss the review by November 22
+5. Salary Decisions: Compensation adjustments communicated by December 15, effective January 1
+
+2.2 Mid-Year Check-In
+A structured mid-year check-in is conducted in June/July. This is not a formal rating event but is used to:
+- Assess progress against annual goals
+- Adjust goals if business priorities have shifted
+- Identify development needs early
+- Recognize top performers and flag concerns
+
+2.3 New Employee Reviews
+Employees in their first year receive a 90-day check-in and a 6-month review in addition to the standard annual cycle if they joined before July.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. PERFORMANCE RATING SCALE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NexaCore uses a 5-point rating scale:
+
+5 — Exceptional:
+Consistently far exceeds expectations. Demonstrates extraordinary impact. A role model for the team. Top ~10% of performers.
+
+4 — Exceeds Expectations:
+Regularly exceeds goals and expectations. Strong contributor with clear impact. Top ~20% of performers.
+
+3 — Meets Expectations:
+Fully meets job expectations and goals. Solid, reliable contributor. Expected rating for majority of strong performers (~50%).
+
+2 — Partially Meets Expectations:
+Some expectations met but falls short in key areas. Improvement required. Performance plan may be initiated.
+
+1 — Does Not Meet Expectations:
+Consistently fails to meet expectations. Immediate performance improvement plan required. Continued employment at risk.
+
+Note: A rating of 3 is a positive outcome and reflects good performance. Managers should communicate this clearly to avoid rating inflation requests.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. GOAL SETTING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+4.1 OKRs (Objectives and Key Results)
+NexaCore uses the OKR framework for goal-setting at company, team, and individual levels. Company OKRs are set in January and cascaded to departments by the end of January. Individuals set personal OKRs by mid-February in consultation with their manager.
+
+4.2 Goal Criteria
+All goals must be SMART:
+- Specific: Clear and well-defined
+- Measurable: Quantifiable outcome
+- Achievable: Realistic given capacity and resources
+- Relevant: Aligned with team and company goals
+- Time-bound: Clear deadline or milestone
+
+4.3 Goal Updates
+Goals should be reviewed and updated at the mid-year check-in. If significant business changes require goal revision, managers can update goals in Workday at any time with HR notification.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. CONTINUOUS FEEDBACK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Formal reviews are a summary — not a substitute — for ongoing feedback. Managers are expected to:
+- Hold 1:1 meetings with direct reports at least bi-weekly
+- Provide specific, actionable feedback in the moment
+- Recognize achievements promptly and publicly where appropriate
+- Document notable feedback (positive or constructive) in Workday throughout the year
+
+Employees are encouraged to proactively request feedback from peers, cross-functional partners, and managers.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6. PERFORMANCE IMPROVEMENT PLAN (PIP)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+6.1 When a PIP is Initiated
+A Performance Improvement Plan is initiated when an employee receives a rating of 2 or lower, or when a manager identifies significant performance concerns outside the review cycle.
+
+A PIP is not a disciplinary action — it is a structured support process. However, failure to meet PIP goals may result in termination.
+
+6.2 PIP Structure
+A PIP document must be created in Workday and reviewed by HR before being presented to the employee. It must include:
+- Clear description of performance gaps
+- Specific, measurable improvement goals
+- Support and resources provided by the company
+- Timeline (typically 30, 60, or 90 days)
+- Checkpoints and success criteria
+
+6.3 PIP Outcomes
+At the conclusion of the PIP:
+- Successful completion: Employee returns to standard performance management cycle. PIP noted in employee file.
+- Unsuccessful completion: Manager and HR review options, which may include role reassignment or termination.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7. PROMOTIONS AND CAREER DEVELOPMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+7.1 Promotion Criteria
+Promotions are based on:
+- Demonstrated performance at or above the next level for at least 6 months
+- Business need for the higher-level role
+- Manager recommendation supported by evidence
+- HR and department head approval
+
+Promotions are typically announced as part of the annual review cycle but can occur off-cycle for exceptional cases.
+
+7.2 Career Ladders
+NexaCore maintains career ladders for Engineering, Sales, Support, and Operations. These are published in Confluence (HR space). Career ladders define expectations at each level to help employees understand what is needed for advancement.
+
+Note: Career ladders for Design and Data Science roles are still being developed as of September 2023.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8. AI IN PERFORMANCE DECISIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Consistent with NexaCore's AI Policy, AI tools must not be the sole or primary basis for decisions related to hiring, promotion, termination, or compensation. AI may be used as a drafting aid (e.g., to help write performance review summaries), but all final decisions must reflect human judgment and be reviewed by a manager and HR.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+9. CONTACT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- HR Business Partners: hr@nexacore.com | ext. 1000
+- Workday Support: workday-support@nexacore.com

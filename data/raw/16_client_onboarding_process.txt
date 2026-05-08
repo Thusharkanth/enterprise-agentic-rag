@@ -1,0 +1,143 @@
+NEXACORE TECHNOLOGIES — CLIENT ONBOARDING PROCESS
+Document ID: CS-PROC-002 | Version: 2.0 | Last Updated: November 2023
+Owner: Client Success & Sales Operations
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. OVERVIEW
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This document describes the end-to-end process for onboarding a new client to NexaCore Technologies' services. A smooth onboarding sets the tone for the entire client relationship and directly impacts time-to-value, satisfaction, and retention.
+
+Client onboarding typically spans 4–12 weeks depending on service complexity. This process applies to all new client engagements with an ACV (Annual Contract Value) of $50,000 or more. For smaller clients, a simplified onboarding process (see Appendix A — not yet written) applies.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. PRE-ONBOARDING (CONTRACT CLOSE TO KICKOFF)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Immediately upon contract execution:
+
+Sales → Client Success Handoff (within 24 hours of close):
+- Account Executive sends internal handoff email to assigned CSM with:
+  - Signed contract and SOW
+  - Client background and stakeholder map
+  - Agreed service scope and SLA tier
+  - Known risks or sensitivities
+  - Client's industry (healthcare, finance, etc.) for compliance awareness
+
+CSM Actions (within 48 hours):
+- Create client account in Zendesk (support system)
+- Create client workspace in Confluence
+- Open onboarding project in Jira (use template: CS-ONBOARD-TMPL)
+- Schedule kickoff meeting (target: within 5 business days of contract close)
+- Send welcome email to client primary contact
+
+Legal/Compliance (within 5 business days):
+- Confirm NDA and DPA are fully executed
+- Flag any special compliance requirements (HIPAA BAA, PCI DSS, government clauses)
+- Provide compliance checklist to CSM based on client industry
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. KICKOFF MEETING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+The kickoff meeting is the first formal interaction between the NexaCore delivery team and the client. It sets expectations and aligns on goals.
+
+Attendees (NexaCore): CSM, Delivery/Project Lead, relevant technical SME
+Attendees (Client): Executive Sponsor, Primary POC, technical lead
+
+Agenda:
+1. Introductions and relationship overview
+2. Confirm scope, deliverables, and timeline
+3. Review SLA tier and support process
+4. Establish communication cadence and escalation path
+5. Identify first milestone and quick win
+6. Agree on tools and channels (Slack shared channel, email, portal)
+7. Next steps and action items
+
+CSM documents the meeting in Confluence and sends a follow-up email with action items within 24 hours.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. TECHNICAL ONBOARDING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+4.1 Environment Setup
+For managed cloud clients: NexaCore provisions a dedicated AWS or Azure account (depending on client preference) using our standard account vending machine process. Timeline: 5–10 business days.
+
+For software delivery clients: Engineering team sets up project repos, CI/CD, and environments per the engagement SOW.
+
+4.2 Access Provisioning
+Client-specific access is granted after security review:
+- Client technical staff receive access to relevant dashboards, repos, or environments
+- NexaCore staff are granted least-privilege access to client environments
+- All access is documented in the Vendor Register and reviewed quarterly
+
+4.3 Integration Setup
+For clients integrating with NexaCore APIs or platforms:
+- API credentials issued via the secure client portal
+- Integration kickoff call with NexaCore engineering lead
+- API documentation shared (currently PDF via CSM — developer portal not yet live)
+- Sandbox environment provided for testing (10 business days to provision)
+
+4.4 Security Requirements for Healthcare Clients
+Clients in the healthcare sector require additional steps:
+- Signed HIPAA Business Associate Agreement (BAA) — must be in place before any data exchange
+- PHI data must only be stored in HIPAA-compliant AWS or Azure configurations
+- NexaCore security team conducts an environment readiness review before go-live
+
+4.5 Security Requirements for Financial Clients
+- PCI-DSS compliance scope defined — cardholder data must be tokenized
+- Confirm client's own PCI compliance status
+- NexaCore's scope of PCI responsibility documented in SOW
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. GO-LIVE AND HYPERCARE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+5.1 Go-Live Readiness Checklist
+Before any client go-live:
+☐ All contractual deliverables in scope are complete or deferred with client sign-off
+☐ SLAs are configured in Zendesk and monitoring tools
+☐ Support contacts established on both sides
+☐ Runbook for client environment documented
+☐ Monitoring and alerting configured (Datadog dashboards and PagerDuty alerts)
+☐ Client team trained on relevant tools/portals
+☐ Go-live communication drafted and approved by client
+
+5.2 Hypercare Period
+For the first 30 days post-go-live, all clients receive hypercare:
+- Enhanced monitoring: daily system health checks
+- Weekly check-in calls with CSM
+- Faster response times (treated as one tier above contracted SLA)
+- Dedicated Slack channel for the hypercare period (Tier 3 Slack channel extended to other tiers)
+
+5.3 Post-Hypercare Transition
+After 30 days: Transition to standard operating cadence as defined in the SLA. CSM schedules a hypercare review meeting to confirm client satisfaction.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6. ONGOING RELATIONSHIP MANAGEMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Post-onboarding, the CSM manages the ongoing relationship:
+- Monthly or quarterly business reviews (QBRs) based on tier and ACV
+- NPS surveys sent quarterly
+- Contract renewal tracking 90 days before expiry
+- Expansion opportunities flagged to Sales
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7. KNOWN GAPS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Simplified onboarding process for <$50K clients (Appendix A) not yet written
+- Developer portal for API documentation not yet live; clients receive PDFs via CSM
+- Account vending machine for Azure is partially automated; manual steps still required for some configurations
+- No formal NPS survey process implemented yet as of Nov 2023
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8. CONTACTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Client Success: client-success@nexacore.com
+- Sales Operations: sales-ops@nexacore.com
+- Legal (DPA/BAA): legal@nexacore.com
+- Security (compliance review): security@nexacore.com
+- Cloud Provisioning: cloud-ops@nexacore.com

@@ -1,13 +1,40 @@
-from langchain_community.embeddings import OllamaEmbeddings
-from langchain_community.vectorstores import Chroma
+from vectorstore.vectordb import load_vector_store
+from services.embeddings import get_embedding_model
 
-def get_retriever():
-    embeddings = OllamaEmbeddings(model="llama3")
 
-    vectorstore = Chroma(
-        persist_directory="rag/vectordb",
-        embedding_function=embeddings
+def retrieve_documents(query, k=4):
+    """
+    Retrieve relevant document chunks from ChromaDB.
+    """
+
+    # Load embedding model
+    embedding_model = get_embedding_model()
+
+    # Load vector database
+    vectorstore = load_vector_store(embedding_model)
+
+    # Perform similarity search
+    results = vectorstore.similarity_search(
+        query=query,
+        k=k
     )
 
-    retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
-    return retriever
+    return results
+
+
+if __name__ == "__main__":
+
+    query = "How are security incidents escalated?"
+
+    results = retrieve_documents(query)
+
+    print("\n========== RETRIEVAL RESULTS ==========\n")
+
+    for i, doc in enumerate(results, start=1):
+
+        print(f"\n--- Result {i} ---\n")
+
+        print(doc.page_content[:500])
+
+        print("\nMetadata:")
+        print(doc.metadata)
