@@ -1,254 +1,244 @@
-﻿# NexaCore Knowledge Assistant
+# Enterprise Agentic RAG Knowledge Assistant
 
-NexaCore Knowledge Assistant is an enterprise Agentic RAG application for answering questions over internal company knowledge documents. It uses a Streamlit interface, a LangGraph workflow, ChromaDB vector search, Ollama embeddings, and Google Gemini to retrieve, evaluate, and generate grounded answers with source citations.
+An enterprise-grade Agentic RAG system built with LangGraph, ChromaDB, Google Gemini, and Ollama embeddings for intelligent internal knowledge retrieval.
 
-## Overview
+## Project Overview
 
-The application lets users ask natural-language questions about internal enterprise documents such as employee policies, onboarding guides, AI governance, deployment procedures, cybersecurity guidelines, incident management, API standards, vendor management, and client onboarding.
+Enterprise teams often store critical knowledge across HR policies, onboarding guides, IT procedures, cybersecurity documents, AI governance rules, deployment standards, and support workflows. Finding the right answer manually is slow, repetitive, and difficult to audit.
 
-At runtime, the system:
+This project solves that problem by providing a grounded AI assistant that retrieves relevant internal documents, evaluates whether the retrieved context is sufficient, and generates answers with source citations.
 
-1. Accepts a user question through the Streamlit UI.
-2. Retrieves relevant document chunks from ChromaDB.
-3. Uses an evaluator agent to decide whether the retrieved context is sufficient.
-4. Generates a grounded answer using Gemini if the context is sufficient.
-5. Returns a fallback response if the knowledge base does not contain enough information.
-6. Appends source document filenames to the final answer.
+The system is designed to reduce hallucinated responses, improve knowledge accessibility, and make enterprise AI responses more explainable and traceable.
+
+## Challenges This System Addresses
+
+- LLMs without access to internal documents can produce hallucinated or unsupported answers.
+- Ungrounded AI-generated responses create compliance, audit, and trust risks.
+- Repetitive HR, IT, onboarding, policy, and process questions increase support workload.
+- Enterprise knowledge is often scattered across multiple documents, making answers hard to find manually.
+- Standard LLM responses lack source traceability and explainability.
+
+## Features
+
+- Agentic RAG workflow using LangGraph
+- Semantic document retrieval with ChromaDB
+- Local embedding generation using Ollama
+- Gemini-powered grounded answer generation
+- LLM-based context sufficiency evaluation
+- Source citation support using document metadata
+- Streamlit frontend for interactive querying
+- Enterprise document ingestion pipeline
+- Persistent local vector database
+- Modular agent, service, graph, and ingestion layers
+
+## System Architecture
+
+![Architecture](diagrams/architecture.png)
+
+The system is organized into four main layers:
+
+| Layer | Responsibility |
+|---|---|
+| UI Layer | Streamlit interface for user queries and answer display |
+| Orchestration Layer | LangGraph workflow that controls retrieve, evaluate, generate, and fallback routing |
+| Retrieval Layer | ChromaDB similarity search over embedded enterprise documents |
+| AI Layer | Gemini for context evaluation and grounded response generation |
+
+## Agentic Workflow
+
+![Workflow](diagrams/workflow.png)
+
+```text
+User Query
+    |
+    v
+Retriever Agent
+    |
+    v
+Evaluator Agent
+    |
+    +-- sufficient --> Answer Generator Agent
+    |
+    +-- insufficient --> Fallback Response
+```
+
+The current graph flow is:
+
+```text
+retrieve -> evaluate -> generate/fallback
+```
+
+### Workflow Steps
+
+1. The user submits a question through the Streamlit application.
+2. The retriever agent performs semantic search against ChromaDB.
+3. The evaluator agent checks whether the retrieved context is enough to answer the question.
+4. If the context is sufficient, the answer generator creates a grounded response.
+5. If the context is insufficient, the system returns a controlled fallback message.
+6. The final answer includes source filenames for traceability.
 
 ## Tech Stack
 
-- **Python** - Core application language.
-- **Streamlit** - Web interface.
-- **LangGraph** - Agent workflow orchestration.
-- **LangChain** - Document loading, text splitting, LLM, embedding, and vector store integrations.
-- **Google Gemini** - LLM used for evaluation and answer generation.
-- **Ollama** - Local embedding runtime.
-- **nomic-embed-text** - Embedding model used through Ollama.
-- **ChromaDB** - Persistent vector database.
-- **python-dotenv** - Environment variable loading from `.env`.
+| Component | Technology |
+|---|---|
+| Language | Python |
+| Frontend | Streamlit |
+| Workflow Engine | LangGraph |
+| LLM | Google Gemini via `langchain-google-genai` |
+| Embeddings | Ollama `nomic-embed-text` |
+| Vector Database | ChromaDB |
+| AI Framework | LangChain |
+| Document Loading | LangChain Community Document Loaders |
+| Text Splitting | RecursiveCharacterTextSplitter |
+| Environment Management | python-dotenv |
 
 ## Repository Structure
 
 ```text
-.
-|-- app.py                       # Streamlit UI entry point
-|-- agents/                      # Agent-level logic
-|   |-- answer_generator.py      # Generates final grounded answer
-|   |-- evaluator_agent.py       # Evaluates retrieved context sufficiency
-|   |-- retriever_agent.py       # Wraps retrieval into context
-|   |-- query_analyzer.py        # Placeholder for future query analysis
-|   `-- web_search_agent.py      # Placeholder for future web search
-|-- data/raw/                    # Source enterprise text documents
+enterprise-agentic-rag/
+|-- app.py
+|-- agents/
+|   |-- answer_generator.py
+|   |-- evaluator_agent.py
+|   |-- retriever_agent.py
+|   |-- query_analyzer.py
+|   `-- web_search_agent.py
+|-- data/
+|   `-- raw/
+|-- diagrams/
+|   |-- architecture.png
+|   |-- rag_pipeline.png
+|   `-- workflow.png
+|-- docs/
 |-- graph/
-|   |-- workflow.py              # LangGraph workflow definition
-|   |-- nodes.py                 # Workflow node implementations
-|   `-- state.py                 # Shared graph state schema
+|   |-- nodes.py
+|   |-- state.py
+|   `-- workflow.py
 |-- ingestion/
-|   |-- loader.py                # Loads TXT files from data/raw
-|   |-- chunker.py               # Splits documents into chunks
-|   `-- ingest.py                # Builds the vector database
+|   |-- chunker.py
+|   |-- ingest.py
+|   `-- loader.py
 |-- prompts/
-|   `-- evaluator_prompt.txt     # Context sufficiency evaluator prompt
+|   |-- analyzer_prompt.txt
+|   |-- evaluator_prompt.txt
+|   `-- generator_prompt.txt
 |-- services/
-|   |-- embeddings.py            # Ollama embedding model setup
-|   |-- llm.py                   # Gemini LLM setup
-|   `-- retrieval.py             # ChromaDB similarity search
+|   |-- embeddings.py
+|   |-- llm.py
+|   `-- retrieval.py
+|-- test/
+|-- utils/
 |-- vectorstore/
-|   |-- vectordb.py              # ChromaDB create/load helpers
-|   `-- chroma_db/               # Persisted local vector database
-`-- test/
-    `-- test_rag.py              # Existing test placeholder/outdated test
+|   |-- chroma_db/
+|   `-- vectordb.py
+|-- requirements.txt
+`-- README.md
 ```
 
-## Architecture
+## Installation Guide
 
-```text
-User
-  |
-  v
-Streamlit UI
-  |
-  v
-LangGraph Workflow
-  |
-  +--> Retrieve Node
-  |       |
-  |       v
-  |   ChromaDB Similarity Search
-  |
-  +--> Evaluate Node
-  |       |
-  |       v
-  |   Gemini Context Sufficiency Check
-  |
-  +--> Generate Node --------> Final Answer with Sources
-  |
-  +--> Fallback Node --------> Insufficient Information Message
+### 1. Clone the Repository
+
+```bash
+git clone <repo-link>
+cd enterprise-agentic-rag
 ```
 
-## Runtime Query Flow
-
-The main workflow is defined in `graph/workflow.py`.
-
-```text
-retrieve -> evaluate -> generate -> END
-                    \
-                     -> fallback -> END
-```
-
-### 1. Retrieve
-
-`retrieve_node` receives the user query and calls `retrieve_context`.
-
-Retrieval uses:
-
-- `services/retrieval.py`
-- `vectorstore/vectordb.py`
-- `services/embeddings.py`
-
-By default, the retriever returns the top `k=4` most similar chunks from ChromaDB.
-
-### 2. Evaluate
-
-`evaluate_node` sends the query and retrieved context to Gemini using `prompts/evaluator_prompt.txt`.
-
-The evaluator must return one of:
-
-```text
-sufficient
-insufficient
-```
-
-### 3. Route
-
-If the evaluator returns `sufficient`, the workflow routes to `generate`.
-
-If not, it routes to `fallback`.
-
-### 4. Generate
-
-`generate_node` calls `generate_answer`, which:
-
-- Retrieves relevant documents.
-- Builds a grounded prompt.
-- Calls Gemini.
-- Appends source filenames from document metadata.
-
-### 5. Fallback
-
-If the system cannot find enough relevant information, it returns:
-
-```text
-I could not find sufficient information in the enterprise knowledge base.
-```
-
-## Ingestion Pipeline
-
-The ingestion pipeline converts raw text files into searchable vector embeddings.
-
-```text
-data/raw/*.txt
-  |
-  v
-DirectoryLoader + TextLoader
-  |
-  v
-RecursiveCharacterTextSplitter
-  |
-  v
-OllamaEmbeddings
-  |
-  v
-ChromaDB
-```
-
-Chunking configuration:
-
-```python
-CHUNK_SIZE = 500
-CHUNK_OVERLAP = 100
-```
-
-The vector database is persisted in:
-
-```text
-vectorstore/chroma_db
-```
-
-## Source Documents
-
-The current knowledge base contains 16 text documents under `data/raw`, including:
-
-- Employee handbook
-- Onboarding guide
-- AI policy
-- Deployment SOP
-- Customer support process
-- Cybersecurity guidelines
-- Cloud architecture notes
-- Leave policy
-- Incident management workflow
-- API design standards
-- Data governance policy
-- Performance management
-- IT procurement and asset management
-- Engineering onboarding supplement
-- Vendor management policy
-- Client onboarding process
-
-## Setup
-
-### 1. Create and Activate a Virtual Environment
+### 2. Create a Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-On Windows PowerShell:
+### 3. Activate the Environment
 
-```powershell
-.\venv\Scripts\Activate.ps1
+Windows:
+
+```bash
+venv\Scripts\activate
 ```
 
-### 2. Install Dependencies
+Linux/Mac:
 
-`requirements.txt` is currently empty, so install the required packages manually or update the file first.
+```bash
+source venv/bin/activate
+```
 
-Expected dependencies include:
+### 4. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+If `requirements.txt` is not populated yet, install the expected dependencies manually:
 
 ```bash
 pip install streamlit python-dotenv langgraph langchain langchain-community langchain-text-splitters langchain-chroma langchain-ollama langchain-google-genai chromadb
 ```
 
-### 3. Configure Environment Variables
+## Ollama Setup
+
+This project uses Ollama for local embedding generation.
+
+Pull the embedding model:
+
+```bash
+ollama pull nomic-embed-text
+```
+
+Start Ollama:
+
+```bash
+ollama serve
+```
+
+The embedding model used by the application is configured in `services/embeddings.py`:
+
+```python
+EMBED_MODEL = "nomic-embed-text:latest"
+```
+
+## Environment Variables
 
 Create a `.env` file in the project root:
 
 ```env
-GOOGLE_API_KEY=your_google_api_key_here
+GOOGLE_API_KEY=your_google_api_key
 ```
 
-### 4. Install and Run Ollama
+The Gemini client is initialized in `services/llm.py`.
 
-Install Ollama and pull the embedding model:
+## Data Ingestion
 
-```bash
-ollama pull nomic-embed-text:latest
+Place enterprise knowledge documents in:
+
+```text
+data/raw/
 ```
 
-Make sure Ollama is running before ingestion or retrieval.
+The current implementation loads `.txt` files from this directory.
 
-## Build the Vector Store
-
-Run the ingestion pipeline after adding or changing files in `data/raw`:
+Run the ingestion pipeline:
 
 ```bash
 python -m ingestion.ingest
 ```
 
-This loads the documents, splits them into chunks, embeds them, and persists them to ChromaDB.
+The ingestion pipeline:
 
-## Run the App
+1. Loads text documents from `data/raw`.
+2. Splits documents into overlapping chunks.
+3. Generates embeddings with Ollama.
+4. Stores vectors in ChromaDB under `vectorstore/chroma_db`.
+
+Current chunking configuration:
+
+| Setting | Value |
+|---|---:|
+| Chunk size | 500 |
+| Chunk overlap | 100 |
+
+## Run the Application
 
 Start the Streamlit app:
 
@@ -256,45 +246,103 @@ Start the Streamlit app:
 streamlit run app.py
 ```
 
-Then open the local Streamlit URL shown in the terminal.
+Then open the local URL shown in the terminal.
 
-## Example Questions
+## Example Queries
 
-- What is the parental leave policy?
-- How do I report a security incident?
-- What AI tools are approved?
-- Explain the deployment process.
+- How should employees report incidents?
+- What are the cybersecurity guidelines?
+- Explain the AI governance policy.
+- What is the employee leave policy?
+- What is the deployment approval process?
 - What is the P1 SLA for enterprise clients?
-- What is the PTO carryover policy for senior employees?
+- What AI tools are approved for employee use?
+
+## Example Output
+
+```text
+Employees should report security incidents immediately through the approved reporting channels defined in the incident management workflow. The process includes notifying the security team, providing relevant incident details, and following escalation procedures based on severity.
+
+Sources:
+- 06_cybersecurity_guidelines.txt
+- 09_incident_management_workflow.txt
+```
+
+## RAG Pipeline
+
+![RAG Pipeline](diagrams/rag_pipeline.png)
+
+The RAG pipeline has two major phases:
+
+| Phase | Description |
+|---|---|
+| Ingestion | Loads, chunks, embeds, and stores enterprise documents in ChromaDB |
+| Query Runtime | Retrieves relevant chunks, evaluates context, and generates grounded answers |
+
+## Current Implementation Details
+
+- The Streamlit app imports the compiled LangGraph workflow from `graph/workflow.py`.
+- `graph/state.py` defines the shared graph state.
+- `graph/nodes.py` maps workflow nodes to agent functions.
+- `services/retrieval.py` performs similarity search with `k=4`.
+- `agents/evaluator_agent.py` uses an LLM prompt that returns only `sufficient` or `insufficient`.
+- `agents/answer_generator.py` builds the final grounded answer and appends source filenames.
 
 ## Current Limitations
 
-- The generator currently performs a second retrieval instead of reusing the context already stored in the LangGraph state.
-- The UI uses the phrase "Knowledge Graph", but the current implementation is vector-based RAG rather than a graph database or formal knowledge graph.
-- Source citations are filename-level citations, not exact chunk-level or line-level citations.
+- No user authentication or role-based access control.
+- No hybrid search; retrieval is currently vector similarity only.
+- No conversation memory across turns.
+- No document upload or re-indexing from the UI.
+- No cloud deployment configuration.
+- No observability dashboard for latency, token usage, retrieval quality, or graph decisions.
+- Source citations are filename-level, not exact section-level or line-level citations.
+- The answer generator currently performs a second retrieval instead of reusing the context already stored in the graph state.
+- Some files are placeholders for future capabilities, including query analysis and web search.
 
 ## Future Improvements
 
+- Add hybrid retrieval with keyword search and vector search.
+- Add query rewriting before retrieval.
+- Add web search fallback for approved external sources.
+- Add multi-agent collaboration for complex queries.
+- Add role-based access control for enterprise users.
+- Add document upload and re-indexing from the UI.
+- Add chunk-level citations with section references.
+- Add tracing and observability for retrieval, evaluation, and generation.
 - Add automated tests for ingestion, retrieval, graph routing, and answer generation.
-- Reuse retrieved context in `generate_node` to avoid duplicate retrieval.
-- Add query analysis or query rewriting before retrieval.
-- Add optional web search fallback.
-- Improve citation granularity with chunk IDs or document sections.
-- Add observability for retrieved chunks, evaluation decisions, latency, and LLM calls.
-- Add admin controls for re-indexing documents from the UI.
+- Add deployment configuration for Docker or cloud platforms.
 
 ## Key Commands
 
 ```bash
-# Build vector store
+# Build or rebuild the vector database
 python -m ingestion.ingest
 
-# Run app
+# Run the Streamlit application
 streamlit run app.py
 
 # Test retrieval manually
 python -m services.retrieval
 
-# Test workflow manually
+# Test the LangGraph workflow manually
 python -m graph.workflow
 ```
+
+## Author
+
+Thusharkanth Loganathan  
+AI/ML Engineer Intern
+
+## License
+
+This project is intended for educational and internal enterprise AI demonstration purposes. Update this section with the appropriate license before public release.
+
+## Acknowledgements
+
+- LangChain
+- LangGraph
+- Google Gemini
+- Ollama
+- ChromaDB
+- Streamlit
