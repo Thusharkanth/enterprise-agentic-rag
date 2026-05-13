@@ -1,14 +1,21 @@
 # Enterprise Agentic RAG Knowledge Assistant
 
-An enterprise-grade Agentic RAG system built with LangGraph, ChromaDB, Google Gemini, and Ollama embeddings for intelligent internal knowledge retrieval.
+An enterprise-grade Agentic RAG system built with LangGraph, ChromaDB, Google Gemini, Ollama embeddings, and a Streamlit interface for grounded internal knowledge retrieval.
 
 ## Project Overview
 
 Enterprise teams often store critical knowledge across HR policies, onboarding guides, IT procedures, cybersecurity documents, AI governance rules, deployment standards, and support workflows. Finding the right answer manually is slow, repetitive, and difficult to audit.
 
-This project solves that problem by providing a grounded AI assistant that retrieves relevant internal documents, evaluates whether the retrieved context is sufficient, and generates answers with source citations.
+This project solves that problem with a grounded AI assistant that retrieves relevant internal documents, evaluates whether the retrieved context is sufficient, and generates answers with source citations.
 
 The system is designed to reduce hallucinated responses, improve knowledge accessibility, and make enterprise AI responses more explainable and traceable.
+
+## Article
+
+A full write-up for this project is available in the `Article/` folder:
+
+- [Enterprise Agentic RAG Medium Article PDF](Article/Enterprise_Agentic_RAG_Medium_Article.pdf)
+- [Enterprise Agentic RAG Medium Article DOCX](Article/Enterprise_Agentic_RAG_Medium_Article.docx)
 
 ## Challenges This System Addresses
 
@@ -33,7 +40,7 @@ The system is designed to reduce hallucinated responses, improve knowledge acces
 
 ## System Architecture
 
-![Architecture](diagrams/architecture.png)
+![Enterprise Agentic RAG system architecture](diagrams/Enterprise%20Agentic%20RAG%20%E2%80%94%20System%20Architecture.drawio.svg)
 
 The system is organized into four main layers:
 
@@ -46,7 +53,7 @@ The system is organized into four main layers:
 
 ## Agentic Workflow
 
-![Workflow](diagrams/workflow.png)
+![Agentic decision workflow](diagrams/Agentic%20Decision%20Workflow.drawio.svg)
 
 ```text
 User Query
@@ -77,6 +84,53 @@ retrieve -> evaluate -> generate/fallback
 5. If the context is insufficient, the system returns a controlled fallback message.
 6. The final answer includes source filenames for traceability.
 
+## Document Ingestion Flow
+
+![Document ingestion flow](diagrams/Document%20ingestion%20flow.drawio.svg)
+
+The ingestion flow prepares enterprise text documents for retrieval:
+
+| Step | Description |
+|---|---|
+| Load | Reads `.txt` documents from `data/raw/` |
+| Chunk | Splits long documents into overlapping chunks |
+| Embed | Creates local embeddings with Ollama `nomic-embed-text` |
+| Store | Persists vectors in ChromaDB under `vectorstore/chroma_db/` |
+
+Current chunking configuration:
+
+| Setting | Value |
+|---|---:|
+| Chunk size | 500 |
+| Chunk overlap | 100 |
+
+## RAG Pipeline
+
+![RAG pipeline flow](diagrams/RAG%20Pipeline%20Flow.drawio.svg)
+
+The RAG pipeline has two major phases:
+
+| Phase | Description |
+|---|---|
+| Ingestion | Loads, chunks, embeds, and stores enterprise documents in ChromaDB |
+| Query Runtime | Retrieves relevant chunks, evaluates context, and generates grounded answers |
+
+## UI Preview
+
+The Streamlit UI provides a dashboard-style interface for asking questions, viewing system status, and reading source-grounded responses.
+
+### Query Interface
+
+![Query interface](diagrams/Screenshot%202026-05-09%20192247.png)
+
+### Answer With Source Citations
+
+![Agent answer with source citations](diagrams/Screenshot%202026-05-09%20192254.png)
+
+### Full Application View
+
+![Full Streamlit application view](diagrams/Screenshot%202026-05-09%20192238.png)
+
 ## Tech Stack
 
 | Component | Technology |
@@ -100,16 +154,24 @@ enterprise-agentic-rag/
 |-- agents/
 |   |-- answer_generator.py
 |   |-- evaluator_agent.py
-|   |-- retriever_agent.py
 |   |-- query_analyzer.py
+|   |-- retriever_agent.py
 |   `-- web_search_agent.py
+|-- Article/
+|   |-- Enterprise_Agentic_RAG_Medium_Article.docx
+|   `-- Enterprise_Agentic_RAG_Medium_Article.pdf
 |-- data/
 |   `-- raw/
 |-- diagrams/
-|   |-- architecture.png
-|   |-- rag_pipeline.png
-|   `-- workflow.png
+|   |-- Agentic Decision Workflow.drawio.svg
+|   |-- Document ingestion flow.drawio.svg
+|   |-- Enterprise Agentic RAG — System Architecture.drawio.svg
+|   |-- RAG Pipeline Flow.drawio.svg
+|   |-- Screenshot 2026-05-09 192238.png
+|   |-- Screenshot 2026-05-09 192247.png
+|   `-- Screenshot 2026-05-09 192254.png
 |-- docs/
+|   `-- Enterprise_Agentic_RAG_Technical_Overview.pdf
 |-- graph/
 |   |-- nodes.py
 |   |-- state.py
@@ -119,15 +181,13 @@ enterprise-agentic-rag/
 |   |-- ingest.py
 |   `-- loader.py
 |-- prompts/
-|   |-- analyzer_prompt.txt
-|   |-- evaluator_prompt.txt
-|   `-- generator_prompt.txt
+|   `-- evaluator_prompt.txt
 |-- services/
 |   |-- embeddings.py
 |   |-- llm.py
 |   `-- retrieval.py
 |-- test/
-|-- utils/
+|   `-- test_rag.py
 |-- vectorstore/
 |   |-- chroma_db/
 |   `-- vectordb.py
@@ -231,13 +291,6 @@ The ingestion pipeline:
 3. Generates embeddings with Ollama.
 4. Stores vectors in ChromaDB under `vectorstore/chroma_db`.
 
-Current chunking configuration:
-
-| Setting | Value |
-|---|---:|
-| Chunk size | 500 |
-| Chunk overlap | 100 |
-
 ## Run the Application
 
 Start the Streamlit app:
@@ -267,17 +320,6 @@ Sources:
 - 06_cybersecurity_guidelines.txt
 - 09_incident_management_workflow.txt
 ```
-
-## RAG Pipeline
-
-![RAG Pipeline](diagrams/rag_pipeline.png)
-
-The RAG pipeline has two major phases:
-
-| Phase | Description |
-|---|---|
-| Ingestion | Loads, chunks, embeds, and stores enterprise documents in ChromaDB |
-| Query Runtime | Retrieves relevant chunks, evaluates context, and generates grounded answers |
 
 ## Current Implementation Details
 
